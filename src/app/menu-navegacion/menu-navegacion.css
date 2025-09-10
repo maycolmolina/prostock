@@ -1,0 +1,33 @@
+.encabezado{
+    background-color: rgb(55, 62, 119);
+    color: aliceblue;
+    display: flex;
+    flex-direction: row;
+    padding: 5px 10px;
+    align-items: center;
+}
+nav{
+    margin-left: auto;
+}
+.activo{
+    background-color: aliceblue;
+    color:black;
+    transition: all 0.5s ;
+}
+ul{
+    display: flex;
+    flex-direction: row;
+}
+ul li{
+    list-style: none;
+    margin: 0px 10px;
+    border: solid white 1px;
+    padding: 0px 14px;
+    border-radius: 10px;
+}
+.perfil{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-left: 10px;
+}

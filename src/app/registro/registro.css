@@ -1,0 +1,83 @@
+/* Estilo del host del componente */
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 89vh;
+   background: linear-gradient(180deg, rgb(55, 62, 119), rgb(34, 38, 75));
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Tarjeta de registro */
+.registro-card {
+  background: #fff;
+  padding: 40px 35px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  width: 400px;
+  text-align: center;
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.registro-card h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Inputs */
+.registro-card input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 15px;
+  outline: none;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.registro-card input:focus {
+  border: 1px solid #667eea;
+  box-shadow: 0 0 5px rgba(102, 126, 234, 0.5);
+}
+
+/* Botón */
+.registro-card button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.registro-card button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+/* Links */
+.registro-card .links {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.registro-card .links a {
+  text-decoration: none;
+  color: #667eea;
+  font-weight: 500;
+}
+
+.registro-card .links a:hover {
+  text-decoration: underline;
+}
