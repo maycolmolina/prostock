@@ -3,5 +3,6 @@ export interface Usuario {
     contrasenia:string,
     correo:string,
     numero:string,
-    urlimg:string
+    urlimg:string,
+    tipo:string
 }

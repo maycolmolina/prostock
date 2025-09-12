@@ -7,24 +7,35 @@
             <li routerLink="" >
                 inicio
             </li>
-            <li routerLink="sectorpro" routerLinkActive="activo">
+            
+            @if (islogin()) {
+                <li routerLink="asistente" routerLinkActive="activo">
+                asistente virtual
+                </li>
+                <li routerLink="calculadora" routerLinkActive="activo">
+                    funcionalidades
+                </li>
+                <li routerLink="marketplace" routerLinkActive="activo">
+                    marketplace
+                </li>
+                <li routerLink="reportes" routerLinkActive="activo">
+                    reportes 
+                </li>
+                <li routerLink="ajustes" routerLinkActive="activo">
+                    ajustes
+                </li>
+            }@else {
+                <li routerLink="sectorpro" routerLinkActive="activo">
                 sectores y productos
-            </li>
-            <li routerLink="formulaciones" routerLinkActive="activo">
-                formulaciones
-            </li>
-            <li routerLink="calculadora" routerLinkActive="activo">
-                calculadora
-            </li>
-            <li routerLink="marketplace" routerLinkActive="activo">
-                marketplace
-            </li>
-            <li routerLink="reportes" routerLinkActive="activo">
-                reportes 
-            </li>
-            <li routerLink="ajustes" routerLinkActive="activo">
-                ajustes
-            </li>
+                </li>
+                 <li class="botonlogin" routerLink="login" routerLinkActive="activo">
+                    iniciar session 
+                </li>
+                <li class="botonlogin" routerLink="registro" routerLinkActive="activo">
+                    registrarse
+                </li>
+            }
+
         </ul>
     </nav>
 </section>

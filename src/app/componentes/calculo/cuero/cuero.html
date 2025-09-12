@@ -1,0 +1,93 @@
+<div class="container">
+  <div class="calculator-header">
+    <h1><i class="fas fa-ring"></i> Calculadora de Consumo de Cuero</h1>
+    <p>Calcula la cantidad de cuero necesaria para tus artículos de marroquinería</p>
+  </div>
+  <div class="calculator-content">
+    <div class="input-section">
+      <div class="form-group">
+        <label>Tipo de Producto:</label>
+        <select [(ngModel)]="productType" (change)="calculateLeather()">
+          <option value="shoes">Zapatos (par)</option>
+          <option value="belt">Cinturón / Faja</option>
+          <option value="wallet">Cartera / Billetera</option>
+          <option value="bag">Bolso / Morral</option>
+          <option value="jacket">Chaqueta de cuero</option>
+          <option value="gloves">Guantes (par)</option>
+          <option value="custom">Personalizado</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Talla / Dimensiones:</label>
+        <select [(ngModel)]="size" (change)="calculateLeather()">
+          <option value="xs">XS</option>
+          <option value="s">S</option>
+          <option value="m">M</option>
+          <option value="l">L</option>
+          <option value="xl">XL</option>
+          <option value="xxl">XXL</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Tipo de Cuero:</label>
+        <select [(ngModel)]="leatherType" (change)="calculateLeather()">
+          <option value="fullGrain">Cuero Grano Completo</option>
+          <option value="topGrain">Cuero de Flor Superior</option>
+          <option value="genuine">Cuero Genuino</option>
+          <option value="suede">Gamuza</option>
+          <option value="exotic">Cuero Exótico</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Tamaño del cuero (pies cuadrados):</label>
+        <input type="number" [(ngModel)]="hideSize" min="20" max="100">
+      </div>
+
+      <div class="form-group">
+        <label>Cantidad de productos:</label>
+        <input type="number" [(ngModel)]="quantity" (input)="calculateLeather()" min="1" max="1000">
+      </div>
+
+      <div class="leather-pattern">
+        <label>Complejidad del diseño:</label>
+        <input type="range" [(ngModel)]="complexity" (input)="calculateLeather()" min="1" max="5">
+        <div style="display: flex; justify-content: space-between;">
+          <span>Simple</span>
+          <span>Moderado</span>
+          <span>Complejo</span>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" (click)="calculateLeather()">Calcular Consumo</button>
+    </div>
+
+    <div class="result-section">
+      <div class="result-box">
+        <h2>Cuero requerido:</h2>
+        <div class="result-value">{{ resultValue }}</div>
+        
+        <div class="result-details">
+          <h3>Desglose del cálculo:</h3>
+          <div class="detail-item"><span>Producto:</span><span>{{ detailProduct }}</span></div>
+          <div class="detail-item"><span>Talla:</span><span>{{ detailSize }}</span></div>
+          <div class="detail-item"><span>Consumo por unidad:</span><span>{{ detailPerProduct }}</span></div>
+          <div class="detail-item"><span>Tipo de cuero:</span><span>{{ detailLeatherType }}</span></div>
+          <div class="detail-item"><span>Cantidad:</span><span>{{ detailQuantity }}</span></div>
+          <div class="detail-item"><span>Pérdida por diseño:</span><span>{{ detailWaste }}</span></div>
+        </div>
+
+        <div class="leather-suggestion">
+          <h3><i class="fas fa-lightbulb"></i> Recomendación</h3>
+          <p>{{ leatherSuggestion }}</p>
+        </div>
+
+        <div class="waste-note">
+          <i class="fas fa-info-circle"></i> <strong>Nota:</strong> El cálculo incluye un 15% adicional para pérdidas por defectos del cuero y cortes.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

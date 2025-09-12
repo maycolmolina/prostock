@@ -1,6 +1,4 @@
 .encabezado{
-    background-color: rgb(55, 62, 119);
-    color: aliceblue;
     display: flex;
     flex-direction: row;
     padding: 5px 10px;
@@ -8,15 +6,17 @@
 }
 nav{
     margin-left: auto;
+    
 }
 .activo{
-    background-color: aliceblue;
-    color:black;
+    background-color: rgb(20, 73, 119);
+    color:rgb(255, 255, 255);
     transition: all 0.5s ;
 }
 ul{
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 ul li{
     list-style: none;
@@ -24,10 +24,16 @@ ul li{
     border: solid white 1px;
     padding: 0px 14px;
     border-radius: 10px;
+    height: auto;
 }
 .perfil{
     width: 50px;
     height: 50px;
     border-radius: 50%;
     margin-left: 10px;
+}
+ul .botonlogin{
+    background-color: blue;
+    color: aliceblue;
+    padding: 10px;
 }

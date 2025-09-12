@@ -1,0 +1,78 @@
+<div class="container">
+  <div class="calculator-header">
+    <h1><i class="fas fa-ruler"></i> Calculadora de Consumo de Tela</h1>
+    <p>Calcula la cantidad de tela necesaria para tus prendas según talla y tipo</p>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active">Modo Simple</div>
+    <div class="tab">Modo Avanzado</div>
+  </div>
+
+  <div class="calculator-content">
+    <div class="input-section">
+      <div class="form-group">
+        <label for="garmentType">Tipo de Prenda:</label>
+        <select [(ngModel)]="selectedGarment">
+          <option *ngFor="let g of garmentOptions" [value]="g.value">{{ g.label }}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="size">Talla:</label>
+        <select [(ngModel)]="selectedSize">
+          <option *ngFor="let s of sizeOptions" [value]="s.value">{{ s.label }}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="fabricWidth">Ancho de la tela (cm):</label>
+        <input type="number" [(ngModel)]="fabricWidth" min="90" max="200">
+      </div>
+
+      <div class="form-group">
+        <label for="quantity">Cantidad de prendas:</label>
+        <input type="number" [(ngModel)]="quantity" min="1" max="1000">
+      </div>
+
+      <button class="btn btn-primary" (click)="calculateFabric()">Calcular Consumo</button>
+    </div>
+
+    <div class="result-section">
+      <div class="result-box">
+        <h2>Tela requerida:</h2>
+        <div class="result-value">{{ totalFabric | number:'1.2-2' }} metros</div>
+        
+        <div class="result-details">
+          <h3>Desglose del cálculo:</h3>
+          <div class="detail-item">
+            <span>Prenda:</span>
+            <span>{{ garmentName }}</span>
+          </div>
+          <div class="detail-item">
+            <span>Talla:</span>
+            <span>{{ sizeName }}</span>
+          </div>
+          <div class="detail-item">
+            <span>Consumo por prenda:</span>
+            <span>{{ adjustedConsumption | number:'1.2-2' }} metros</span>
+          </div>
+          <div class="detail-item">
+            <span>Ancho de tela:</span>
+            <span>{{ fabricWidth }} cm</span>
+          </div>
+          <div class="detail-item">
+            <span>Cantidad:</span>
+            <span>{{ quantity }}</span>
+          </div>
+        </div>
+
+        <div class="fabric-suggestion">
+          <h3><i class="fas fa-lightbulb"></i> Recomendación</h3>
+          <p>{{ fabricSuggestion }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

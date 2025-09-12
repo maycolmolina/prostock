@@ -1,9 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Realtime } from '../services/realtime';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Usuario } from '../objetos';
 import { Switalert2Service } from '../services/switalert2.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-registro',
   imports: [RouterLink,ReactiveFormsModule],
@@ -18,36 +19,31 @@ export class Registro {
     email:['',[Validators.required]],
     constrasenia:['',[Validators.required]],
     telefono:['',[Validators.required]],
+    tipoUsuario:['cliente',[Validators.required]]
   })
   usuario:Usuario={
     nombre:'',
     contrasenia:'',
     correo:'',
     numero:'',
-    urlimg:''
+    urlimg:'',
+    tipo:''
 }
 
-  constructor(private realtime:Realtime,private alerta:Switalert2Service){}
+  constructor(private rutas:Router,private realtime:Realtime,private alerta:Switalert2Service){}
   async createuser(){
     this.usuario.nombre=this.form.value.nombre ?? '';
     this.usuario.contrasenia=this.form.value.constrasenia ?? '';
     this.usuario.correo=this.form.value.email ?? '';
     this.usuario.numero=this.form.value.telefono ?? '';
+    this.usuario.tipo=this.form.value.tipoUsuario ?? '';
     
     if(await this.realtime.correoExiste(this.usuario.correo)){
       this.alerta.info('el correo que quiere ingresar ya esta siendo utilizado')
       return;
     }
     
-    this.realtime.createuser(this.usuario).subscribe(
-      ()=>{
-        this.alerta.alertaExito('el usuario ha sido registrado correctamente');
-      }
-      ,
-      ()=>{
-        this.alerta.alertaerror('vaya parece que ha ocirrido un error');
-      }
-    )
+    await this.realtime.createuser(this.usuario);
   }
   
 }
