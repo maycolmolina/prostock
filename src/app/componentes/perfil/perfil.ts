@@ -18,8 +18,8 @@ export class Perfil implements OnInit{
   };
    accesos = [
     { titulo: 'Ingresar Productos', link: '../ingresarpro' },
-    { titulo: 'Mis Productos', link: '/productos' },
-    { titulo: 'Facturación', link: '/facturacion' },
+    { titulo: 'Mis Productos', link: '../gestionpro' },
+    { titulo: 'facturacion', link: '/facturacion' },
     { titulo: 'ganacia pro dia', link: '/configuracion' }
   ];
   

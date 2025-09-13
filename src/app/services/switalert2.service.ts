@@ -55,7 +55,7 @@ export class Switalert2Service {
   }
   alertacompleja(){
     Swal.fire({
-      title: "<strong>HTML <u>example</u></strong>",
+      title: "<strong><u>example</u></strong>",
       icon: "info",
       html: `
         You can use <b>bold text</b>,

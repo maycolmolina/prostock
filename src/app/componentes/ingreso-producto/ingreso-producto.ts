@@ -5,6 +5,7 @@ import { StorageService } from '../../services/localstorage.service';
 import { Switalert2Service } from '../../services/switalert2.service';
 import { GlobalbaseService } from '../../services/storage.service';
 import { Realtime } from '../../services/realtime';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ingreso-producto',
@@ -42,7 +43,7 @@ export class IngresoProducto implements OnInit{
       return
     }
     try{
-    const uriImg= await this.global.uploadfile(this.imag) ;
+    const uriImg= await this.global.subirImagen(this.imag);
     const pro:any={
       nombre: this.producto.nombre,
       categoria: this.producto.categoria,
@@ -55,6 +56,7 @@ export class IngresoProducto implements OnInit{
     }
     await this.realtime.mandarPro(pro);
     this.alerta.alertaExito('el producto se guardo correctamente')
+    this.ruta.navigate(['../perfil']);
     }catch{
       this.alerta.alertaerror('el porducto no se guardo correctamente');
     }
@@ -79,5 +81,5 @@ export class IngresoProducto implements OnInit{
   ngOnInit(): void {
     this.producto.idUsuario=this.local.getItem('key');
   }
-  constructor(private realtime:Realtime, private global:GlobalbaseService,private local:StorageService,private alerta:Switalert2Service){}
+  constructor(private ruta:Router, private realtime:Realtime, private global:GlobalbaseService,private local:StorageService,private alerta:Switalert2Service){}
 }

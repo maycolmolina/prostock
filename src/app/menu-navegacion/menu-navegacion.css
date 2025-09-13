@@ -3,6 +3,7 @@
     flex-direction: row;
     padding: 5px 10px;
     align-items: center;
+    border-bottom: rgb(40, 40, 107) solid 1px;
 }
 nav{
     margin-left: auto;
@@ -25,6 +26,7 @@ ul li{
     padding: 0px 14px;
     border-radius: 10px;
     height: auto;
+    cursor: pointer;
 }
 .perfil{
     width: 50px;

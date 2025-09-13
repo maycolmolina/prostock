@@ -13,6 +13,7 @@ import { Material } from './componentes/calculo/material/material';
 import { Textil } from './componentes/calculo/textil/textil';
 import { Asistente } from './componentes/asistente/asistente';
 import { IngresoProducto } from './componentes/ingreso-producto/ingreso-producto';
+import { GestionProductos } from './componentes/gestion-productos/gestion-productos';
 
 export const routes: Routes = [
     {path:'ajustes', component:Ajustes},
@@ -28,5 +29,7 @@ export const routes: Routes = [
     {path:'material', component:Material},
     {path:'textil', component:Textil},
     {path:'ingresarpro', component:IngresoProducto},
+    {path:'gestionpro', component:GestionProductos},
+
     {path:'',component:Inicio}
 ];

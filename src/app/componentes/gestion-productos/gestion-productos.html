@@ -1,0 +1,67 @@
+<div class="container">
+  <h2>Lista de Productos</h2>
+
+  <!-- Buscador -->
+  <input type="text" placeholder="Buscar producto..." [(ngModel)]="filtro" class="buscador">
+
+  <!-- Tabla de productos -->
+  <div class="table-responsive">
+    <table class="productos-table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Costo</th>
+          <th>Precio</th>
+          <th>Cantidad</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+
+    @for (producto of productos; track producto.id) {
+          <tr >
+          <td>{{ producto.nombre }}</td>
+          <td>{{ producto.costo | currency:'USD' }}</td>
+          <td>{{ producto.precio_venta | currency:'USD' }}</td>
+          <td>{{ producto.cantidad }}</td>
+          <td>
+            <button (click)="verProducto(producto)">Ver</button>
+            <button (click)="eliminarProducto(producto.id,producto.urlimg)">Eliminar</button>
+          </td>
+        </tr>
+    }
+      </tbody>
+    </table>
+  </div>
+  @if (vistapro==true) {
+     <div class="verproducto">
+    <div class="card">
+    <strong (click)="cerra()" class="cerrar">x</strong>
+    <img [src]="productounico.urlimg" [alt]="productounico.nombre">
+
+      <div class="cards2">
+        <div class="card-content">
+          <h2>{{productounico.nombre}}</h2>
+          <p class="info"><span>Categoría:</span>{{productounico.categoria}}</p>
+          <p class="info"><span>Proveedor:</span> {{productounico.proveedor}}</p>
+          <p class="info"><span>Cantidad:</span> {{productounico.cantidad}} unidades</p>
+          <p class="info"><span>Costo:</span> <span class="costo">{{productounico.costo}}C$</span></p>
+          <p class="info"><span>Precio Venta:</span> <span class="precio">{{productounico.precio_venta}}C$</span></p>
+        </div>
+        <div class="card-content2">
+          <p class="info"><span>margen por unidad:</span>{{productounico.precio_venta-productounico.costo}}C$</p>
+          <p class="info"><span>procentaje de ganacia</span> {{((productounico.precio_venta-productounico.costo)/productounico.costo)*100| number:'1.1-1'}}%</p>
+          <p class="info"><span>ganacia potencial</span> {{productounico.cantidad*(productounico.precio_venta-productounico.costo)}}C$ </p>
+
+        </div>
+      </div>
+
+    
+    </div>
+  </div>
+    
+  }
+ 
+
+
+</div>
