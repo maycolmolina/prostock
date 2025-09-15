@@ -16,6 +16,7 @@ import {
   set,
 } from '@angular/fire/database';
 import { Router } from '@angular/router';
+import { Auth, createUserWithEmailAndPassword } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root',
@@ -34,23 +35,50 @@ export class Realtime {
         this.alerta.alertaerror('Error al eliminar el producto:');
       });
   }
-
-  async createuser(usuario: Usuario) {
-    if (this.token === '') {
-      this.token = await this.auth.login();
-    }
-    return this.http.post(this.realtimeUrl + 'usuarios.json?auth=' + this.token, usuario).subscribe(
-      (RES) => {
-        this.alerta.alertaExito('el usuario ha sido registrado correctamente');
-        this.local.setItem('user', usuario);
-        this.local.setItem('key', Object.values(RES)[0]);
-        this.ruta.navigate(['perfil']);
-      },
-      () => {
-        this.alerta.alertaerror('vaya parece que ha ocirrido un error');
-      }
-    );
+  mandarPro(pro: any) {
+    const productosRef = ref(this.db, 'productos');
+    const newRef = push(productosRef);
+    return set(newRef, pro);
   }
+
+ async createuser(usuario: Usuario) {
+  try {
+    const userc = await createUserWithEmailAndPassword(
+      this.auth,
+      usuario.correo,
+      usuario.contrasenia
+    );
+
+    const uid = userc.user.uid;
+    const usuarioref = ref(this.db, 'usuarios/' + uid);
+
+    await set(usuarioref, usuario);
+
+    this.alerta.alertaExito('El usuario ha sido registrado correctamente');
+    usuario.contrasenia='';
+    this.local.setItem('user', usuario);
+    this.local.setItem('key', uid);
+    this.ruta.navigate(['perfil']);
+
+  } catch (error: any) {
+    switch (error.code) {
+      case 'auth/email-already-in-use':
+        this.alerta.alertaerror('El correo ya está registrado, intenta iniciar sesión.');
+        break;
+      case 'auth/invalid-email':
+        this.alerta.alertaerror('Por favor ingresa un correo válido.');
+        break;
+      case 'auth/weak-password':
+        this.alerta.alertaerror('La contraseña debe tener al menos 6 caracteres.');
+        break;
+      default:
+        this.alerta.alertaerror('Ocurrió un error: ' + error.message);
+        break;
+    }
+  }
+}
+
+
   getMiPro(idavisitar: string) {
     const referencia = ref(this.db, 'productos');
     const consulta = query(referencia, orderByChild('idUsuario'), equalTo(idavisitar));
@@ -60,14 +88,6 @@ export class Realtime {
     const referencia = ref(this.db, 'productos');
     return get(referencia);
   }
-
-  async correoExiste(correo: string): Promise<boolean> {
-    const usuariosRef = ref(this.db, 'usuarios');
-    const q = query(usuariosRef, orderByChild('correo'), equalTo(correo));
-    const snapshot = await get(q);
-    return snapshot.exists();
-  }
-
   async obtenerusuario(correo: string): Promise<any> {
     const usuariosRef = ref(this.db, 'usuarios');
     const q = query(usuariosRef, orderByChild('correo'), equalTo(correo));
@@ -75,18 +95,17 @@ export class Realtime {
     return snapshot;
   }
 
-  mandarPro(pro: any) {
-    const productosRef = ref(this.db, 'productos');
-    const newRef = push(productosRef);
-    return set(newRef, pro);
+  async getUsuarioPorId(idUsuario: string) {
+    const referencia = ref(this.db, 'usuarios/' + idUsuario);
+    const snapshot = await get(referencia);
+    return snapshot;
   }
 
   constructor(
     private ruta: Router,
-    private http: HttpClient,
-    private auth: loginservice,
     private db: Database,
     private alerta: Switalert2Service,
-    private local: StorageService
+    private local: StorageService,
+    private auth: Auth
   ) {}
 }

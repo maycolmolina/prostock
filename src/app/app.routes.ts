@@ -14,6 +14,7 @@ import { Textil } from './componentes/calculo/textil/textil';
 import { Asistente } from './componentes/asistente/asistente';
 import { IngresoProducto } from './componentes/ingreso-producto/ingreso-producto';
 import { GestionProductos } from './componentes/gestion-productos/gestion-productos';
+import { Perfilvendedor } from './componentes/perfilvendedor/perfilvendedor';
 
 export const routes: Routes = [
     {path:'ajustes', component:Ajustes},
@@ -29,6 +30,7 @@ export const routes: Routes = [
     {path:'material', component:Material},
     {path:'textil', component:Textil},
     {path:'ingresarpro', component:IngresoProducto},
+    {path:'visitarperfil/:id', component:Perfilvendedor},
     {path:'gestionpro', component:GestionProductos},
 
     {path:'',component:Inicio}

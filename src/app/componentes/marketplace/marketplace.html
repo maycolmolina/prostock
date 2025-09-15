@@ -55,7 +55,7 @@
             <p>Cantidad: {{ productoSeleccionado.cantidad }}</p>
             <p>Precio: C$ {{ productoSeleccionado.precio_venta }}</p>
             <div class="modal-actions">
-              <button class="primary" (click)="comprarAhora(productoSeleccionado)">
+              <button class="primary" routerLink="../visitarperfil/{{productoSeleccionado.idUsuario}}">
                 visitar vendedor
               </button>
                <button class="what" >pedir por whatsapp</button>

@@ -6,3 +6,11 @@ export interface Usuario {
     urlimg:string,
     tipo:string
 }
+export class usuario {
+    contrasenia:string="";
+    correo:string="";
+    nombre:string="";
+    numero:string="";
+    tipo:string="";    
+    urlimg="";
+  }

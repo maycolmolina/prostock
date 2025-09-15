@@ -38,11 +38,6 @@ export class Registro {
     this.usuario.numero=this.form.value.telefono ?? '';
     this.usuario.tipo=this.form.value.tipoUsuario ?? '';
     
-    if(await this.realtime.correoExiste(this.usuario.correo)){
-      this.alerta.info('el correo que quiere ingresar ya esta siendo utilizado')
-      return;
-    }
-    
     await this.realtime.createuser(this.usuario);
   }
   

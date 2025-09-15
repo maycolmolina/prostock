@@ -1,0 +1,255 @@
+.cargau{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 100vw;
+    height: 80vh;
+    font-size: 5rem;
+}
+.principal{
+    width: 100%;
+    min-height: 85vh;
+    background-color: rgb(255, 255, 255);
+}
+.contenedorperfil{
+    width: 800px;
+    border: rgb(255, 255, 255) solid;
+    margin: auto;
+    height: 250px;
+    position: relative;
+    background-image: url('./portada.jpg');
+    background-position: center ;
+    background-size: cover;
+    box-sizing: border-box;
+}
+.magenperfil{
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    top: calc(100% - 150px);
+    border-radius: 50%;
+    background-color: black;
+    border: solid 7px rgb(255, 255, 255);
+    left: calc(50% - 150px);
+    z-index: 2;
+}
+.datos{
+    width: 800px;
+    margin-bottom: 20px;
+    height: auto;
+    margin: auto;
+    margin-top: 140px;
+    box-sizing: border-box;
+}
+.datos>span{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.nombre{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 600;
+    color: rgb(60, 60, 63);
+    text-shadow: 0px 0px 2px  black;
+    text-decoration: underline;
+    height: 100px;
+    text-align: center;
+    align-items: center;
+}
+
+.aciones{
+    display: flex;
+    justify-content: flex-end;
+}
+.aciones button{
+    border: none;
+    margin: 0px 0px 0px 10px;
+    padding: 4px;
+    transition: ease all 0.3s;
+    border-radius: 8px;
+    background-image: linear-gradient(
+        150deg,
+        #9500ff,
+        #09f,
+        #0df
+    );
+    display: flex;
+    font-size: 10px;
+    cursor: pointer;
+}
+.aciones button span{
+    color: #fff;
+    background-color: black;
+    padding: 4px 6px;
+    border-radius: inherit;
+    transition: ease all 0.3s;
+    font-size: 1.2rem;
+}
+.aciones button .llamar{
+    background-color: #25D366;
+}
+.ofert{
+    background-color: rgba(255, 217, 0, 0.678);
+    color: black;
+    border-radius: 5px;
+    padding: 5px;
+    font-weight: bold;
+    display: inline;
+}
+.aciones button:hover span{
+    background-color: transparent;
+}
+.aciones button:active{
+    transform: scale(0.8);
+}
+.green{color: green;}
+.atributos{
+    color: rgb(5, 5, 5);
+    font-size: 1.2rem;
+    margin-left: 10px;
+}
+
+/* --------------------------- */
+.listapro{
+    padding-top: 10px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-wrap: wrap;
+    color: rgb(58, 52, 52);
+}
+
+.nombrep{
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: rgb(85, 56, 216);
+    text-shadow: 0px 0px 5px rgb(127, 236, 255);
+}
+.img-container{
+    width: 100%;
+    /* height: 3px; */
+}
+.pro1{
+    width: 300px;
+    overflow: hidden;
+    height: auto;
+    border-radius: 6px;
+    border: solid rgb(75, 63, 63) 1px;
+    padding: 10px;
+    margin: 10px;
+    transition: all 0.3s ease-out;
+}
+.pro1 img{
+    width: 100%;
+    object-fit: contain;
+}
+.precio{
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: rgb(10, 23, 201);
+    text-shadow: 0px 0px 5px rgb(53, 37, 197);
+}
+.pro1:hover{
+    box-shadow: 0px  0px 5px 7px rgb(15, 15, 15);
+}
+.btn.bn{
+    border: solid 1px rgb(22, 21, 21); 
+    margin:2px;
+    transition: all ease 0.3s;
+}
+.btn.bn:hover{
+    background-color: rgb(34, 32, 32);
+    color: rgb(255, 255, 255);
+}
+.btn.bn2{
+    /* border: solid 1px rgb(22, 21, 21);  */
+    margin:2px;
+    background-color: #25D366;
+    transition: all ease 0.3s;
+    color: white;
+}
+.btn.bn2:hover{
+    background-color: rgb(34, 32, 32);
+    color: rgb(255, 255, 255);
+}
+@media screen and (max-width:880px) {
+    .contenedorperfil{
+        width: 90%;
+        height: 250px;
+        
+    }
+    .datos{
+        width: 90%;
+        
+    }
+    .datos>span{
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .contenedorperfil{
+        width: 95%;
+        height: 180px;
+    }
+    .datos{
+        width: 90%;
+        
+    }
+    .datos>span{
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+    .magenperfil{
+        width: 200px;
+        height: 200px;
+        position: absolute;
+        top: calc(100% - 100px);
+        border-radius: 50%;
+        background-color: black;
+        border: solid 4px rgb(255, 255, 255);
+        left: calc(50% - 100px);
+        z-index: 2;
+    }
+    .aciones button{
+        font-size: 5px;
+    }
+    .nombre{
+        font-size: 1.3rem;
+    }
+}
+@media screen and (max-width:450px) {
+    .nombrep{
+        font-size: 1rem;
+    }
+    .atributos{
+        font-size: 15px;
+    }
+    .pro1:hover{
+        box-shadow: 0px  0px 5px 2px rgb(15, 15, 15);
+    }
+    .aciones button span{
+        font-size: 13px;
+    }
+    .magenperfil{
+        width: 150px;
+        height: 150px;
+        position: absolute;
+        top: calc(100% - 75px);
+        border-radius: 50%;
+        background-color: black;
+        border: solid 4px rgb(255, 255, 255);
+        left: calc(50% - 75px);
+        z-index: 2;
+    }
+    .contenedorperfil{
+        height: 120px;
+    }
+    .datos{
+        margin-top: 90px;
+    }
+}

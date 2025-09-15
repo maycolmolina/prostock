@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Realtime } from '../../services/realtime';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-marketplace',
-  imports: [FormsModule],
+  imports: [FormsModule,RouterLink],
   templateUrl: './marketplace.html',
   styleUrl: './marketplace.css',
 })
