@@ -29,6 +29,7 @@
     "@angular/forms": "^20.2.0",
     "@angular/platform-browser": "^20.2.0",
     "@angular/router": "^20.2.0",
+    "@google/generative-ai": "^0.24.1",
     "@supabase/supabase-js": "^1.35.7",
     "bootstrap": "^5.3.8",
     "firebase": "^11.10.0",
