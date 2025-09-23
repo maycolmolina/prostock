@@ -1,50 +1,64 @@
-.encabezado{
-    display: flex;
-    flex-direction: row;
-    padding: 5px 10px;
-    align-items: center;
-    border-bottom: rgb(40, 40, 107) solid 1px;
+.encabezado {
+  display: flex;
+  flex-direction: row;
+  padding: 5px 60px;
+  align-items: center;
+  /* border-bottom: rgb(40, 40, 107) solid 1px */
+  box-shadow: 0px 1px 5px rgb(144, 140, 140);
 }
-nav{
-    margin-left: auto;
-    
+.encabezado h2{
+  font-weight: 800;
+  background: linear-gradient(90deg, #2c39e7, #f72d2d);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
-.activo{
-    background-color: rgb(20, 73, 119);
-    color:rgb(255, 255, 255);
-    transition: all 0.5s ;
-}
-ul{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-ul li{
-    list-style: none;
-    margin: 0px 10px;
-    border: solid white 1px;
-    padding: 0px 14px;
-    border-radius: 10px;
-    height: auto;
-    cursor: pointer;
-}
-.perfil{
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin-left: 10px;
-    /* border: solid rgb(100, 97, 97) 0.4px; */
-}
-ul .botonlogin{
-    display: flex;
-    background-color: blue;
-    color: aliceblue;
-    padding: 7px;
-    align-items: center;
+nav {
+  display: flex;
+  justify-content: center; /* lo centra horizontalmente */  
+  align-items:  center ;
+  flex: 1;
 }
 
-.vector{
-    width: 30px;
-    height: 30px;
-    display: inline-flex;
+ul {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: auto 0px;
+}
+ul li {
+  list-style: none;
+  margin: 0px 10px;
+  padding: 0px 14px;
+  height: auto;
+  cursor: pointer;
+  font-weight: 500;
+  text-shadow: 0px 0px 3px rgb(83, 76, 76);
+}
+.perfil {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-left: 10px;
+  margin-right: 20px;
+}
+ul .botonlogin {
+  display: flex;
+  background-color: blue;
+  color: aliceblue;
+  padding: 7px;
+  align-items: center;
+  border-radius: 5px;
+  margin-right: auto;
+}
+
+.vector {
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+}
+.activo {
+  transition: all 0.3 ease;
+  border-bottom: solid 2px black;
 }

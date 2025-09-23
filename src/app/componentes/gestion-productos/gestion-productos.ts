@@ -13,12 +13,31 @@ import { Switalert2Service } from '../../services/switalert2.service';
   styleUrl: './gestion-productos.css',
 })
 export class GestionProductos implements OnInit {
+  vista = 'productoventa';
   filtro: string = '';
   productounico: any;
   productos: any[] = [];
+  madera: any[] = [
+    {
+      id: '',
+      id_usuario: '',
+      tipo: '',
+      presentacion: '',
+      unidad_medida: '',
+      cantidad_u_m: 0,
+      precio_unidad_medida: 0,
+      proveedor: '',
+    }
+  ];
   vistapro: boolean = false;
   ngOnInit(): void {
     this.obtenerpro();
+  }
+  async cambiarvista(cadena: string) {
+    this.vista = cadena;
+    if (cadena === 'madera') {
+      this.madera = await this.global.getMiMadera();
+    }
   }
 
   async obtenerpro() {

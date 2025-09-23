@@ -1,1 +1,42 @@
-<p>reportes works!</p>
+<div class="titulo">MIS REPORTES</div>
+<div class="fila">
+  <div class="MENU-LATERAL">
+    <div (click)="cambiarvista('madera')" class="opciones">Compra De Madera</div>
+    <div (click)="cambiarvista('cuero')" class="opciones">Compra De Cueros</div>
+    <div (click)="cambiarvista('aliemtos')" class="opciones">Compra De Alimentos</div>
+  </div>
+  <div class="vista">
+    @if (vista==='madera'){
+    <div class="madera">
+        <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Tipo de Madera</th>
+          <th>Cantidad</th>
+          <th>Proveedor</th>
+          <th>Presentación</th>
+          <th>Precio Total</th>
+          <th>Fecha</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (compra of compras_m; track $index) {
+        <tr>
+          <td>{{compra.tipo}}</td>
+          <td> {{compra.cantidad_comprada+' '+compra.unidad_medida}}</td>
+          <td>{{compra.proveedor}}</td>
+          <td>{{compra.presentacion}}</td>
+          <td>{{compra.precioTotal}} C$</td>
+          <td>{{compra.fecha}}</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+    </div>
+    }@else if (vista==='cuero') {
+    <div class="cuero"></div>
+    }@else {
+    <div class="alimentos"></div>
+    }
+  </div>
+</div>

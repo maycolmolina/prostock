@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 89vh;
+  min-height: 89vh;
    background: linear-gradient(180deg, rgb(55, 62, 119), rgb(34, 38, 75));
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -17,6 +17,7 @@
   width: 400px;
   text-align: center;
   animation: fadeIn 1s ease-in-out;
+  margin-top: 20px;
 }
 
 @keyframes fadeIn {

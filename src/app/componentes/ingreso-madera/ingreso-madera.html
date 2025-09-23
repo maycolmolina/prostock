@@ -1,0 +1,99 @@
+<form class="form-prod fw-bold" (ngSubmit)="onSubmit()" #prodForm="ngForm" novalidate>
+  <h2 class="fw-bold">Comprar Madera</h2>
+  <label class="field">
+    <span>tipo</span>
+    <select name="tipo" [(ngModel)]="Madera.tipo" #presentacion="ngModel" required>
+      <option value="">seleciona un tipo de madera</option>
+      @for (c of tipos; track c) {
+      <option [value]="c">{{ c }}</option>
+      }
+    </select>
+    @if (presentacion.invalid && (presentacion.dirty || presentacion.touched)) {
+    <small class="error">Selecciona una categoría.</small>
+    }
+  </label>
+
+  <label class="field">
+    <span>presentacion</span>
+    <select name="presentacion" [(ngModel)]="Madera.presentacion" #presentacion="ngModel" required>
+      <option value="">-- Selecciona categoría --</option>
+      @for (c of presentaciones; track c) {
+      <option [value]="c">{{ c }}</option>
+      }
+    </select>
+    @if (presentacion.invalid && (presentacion.dirty || presentacion.touched)) {
+    <small class="error">Selecciona una presentacion .</small>
+    }
+  </label>
+
+  <label class="field">
+    <span>Proveedor</span>
+    <input
+      name="proveedor"
+      [(ngModel)]="Madera.proveedor"
+      required
+      minlength="3"
+      #proveedor="ngModel"
+    />
+    @if (proveedor.invalid && (proveedor.dirty || proveedor.touched)) {
+    <small class="error">ingrese el proveedor correctamente</small>
+    }
+  </label>
+
+  <label class="field">
+    <span>fecha</span>
+    <input type="date" name="fecha" [(ngModel)]="fechahoy" #fecha="ngModel" required />
+    @if (fecha.invalid && (fecha.dirty || fecha.touched)) {
+    <small class="error">Ingrese una fecha valida.</small>
+    }
+  </label>
+  <div class="row">
+    <label class="field small">
+      <span>unidad de medida</span>
+      <select name="unidadM" [(ngModel)]="Madera.unidad_medida" #unidadMedida="ngModel" required>
+        <option value="">seleccionar</option>
+        @for (c of unidades; track c) {
+        <option [value]="c">{{ c }}</option>
+        }
+      </select>
+      @if (unidadMedida.invalid && (unidadMedida.dirty || unidadMedida.touched)) {
+      <small class="error">selecciona una unidad valida</small>
+      }
+    </label>
+
+    <label class="field small">
+      <span>cantidad de {{ Madera.unidad_medida }}</span>
+      <input
+        type="number"
+        name="precio_venta"
+        [(ngModel)]="Madera.cantidad_u_m"
+        #cum="ngModel"
+        required
+        min="0"
+        step="0.01"
+      />
+      @if (cum.invalid && (cum.dirty || cum.touched)) {
+      <small class="error">Ingrese un precio válido.</small>
+      }
+    </label>
+    <label class="field small">
+      <span>precio por cada {{ Madera.unidad_medida }}</span>
+      <input
+        type="number"
+        name="precio"
+        [(ngModel)]="Madera.precio_unidad_medida"
+        #precio="ngModel"
+        required
+        maxlength="15"
+        min="2"
+      />
+      @if (precio.invalid && (precio.dirty || precio.touched)) {
+      <small class="error">seleccione un precio</small>
+      }
+    </label>
+  </div>
+  <div class="actions">
+    <button type="submit" [disabled]="prodForm.invalid">Guardar producto</button>
+    <button type="button" class="ghost" (click)="resetForm(prodForm)">Limpiar</button>
+  </div>
+</form>

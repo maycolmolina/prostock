@@ -8,6 +8,7 @@ import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideDatabase, getDatabase } from '@angular/fire/database';
+import { provideMarkdown } from 'ngx-markdown';
 
 const firebaseConfig = {
   apiKey: "AIzaSyC359FAUmxlTk70EYrdRcSaRQQTCsi2K00",
@@ -24,7 +25,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(),
-
+    provideMarkdown(),
     // proveedores de firebase
 
     provideFirebaseApp(() => initializeApp(firebaseConfig)),

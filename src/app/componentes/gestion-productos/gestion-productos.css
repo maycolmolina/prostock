@@ -57,7 +57,7 @@ h2 {
 }
 
 .productos-table button:last-child {
-  background-color: #e74c3c;
+  background-color: #8c473f;
   color: white;
 }
 
@@ -71,6 +71,25 @@ h2 {
     padding: 6px;
   }
 }
+
+
+.accion{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+.boton{
+  margin: 10px 30px ;
+  background-color: var(--color-primary);
+  padding: 10px 30px;
+  border: none;
+  border-radius: 9px;
+  color: var(--color-white);
+  font-weight: 500;
+}
+
+
 /* ver------------------------------------------ */
 
 .verproducto{

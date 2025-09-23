@@ -22,7 +22,7 @@ export class GlobalbaseService {
     //   );
      
     // }
-    this.supabase = GlobalbaseService.supabaseInstance;
+    // this.supabase = GlobalbaseService.supabaseInstance;
 
   }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { StorageService } from '../../services/localstorage.service';
 
 @Component({
@@ -18,15 +18,18 @@ export class Perfil implements OnInit{
   };
    accesos = [
     { titulo: 'Ingresar Productos', link: '../ingresarpro' },
-    { titulo: 'Mis Productos', link: '../gestionpro' },
+    { titulo: 'Mi Inventario', link: '../gestionpro' },
     { titulo: 'facturacion', link: '/facturacion' },
-    { titulo: 'ganacia pro dia', link: '/configuracion' }
+    { titulo: 'Bodega', link: '/ingresoMadera' }
   ];
   
   ngOnInit(): void {
     this.usuario=this.local.getItem('user');
+     if(this.usuario===null){
+      this.ruta.navigate(['../'])
+     }
   }
-  constructor (private local:StorageService){}
+  constructor (private local:StorageService,private ruta:Router){}
  
 
 }
