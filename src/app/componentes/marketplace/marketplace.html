@@ -1,3 +1,5 @@
+
+
 <div class="mp-wrap">
   <header class="mp-header">
     <h1>Marketplace</h1>
@@ -32,14 +34,14 @@
           </div>
         </div>
       </article>
+      } @if (productosFiltrados().length === 0) {
+      <div class="empty">estamos cargando los porductos ofertados</div>
       }
-    @if (productosFiltrados().length === 0) {<div  class="empty">estamos cargando los porductos ofertados</div>}
-    
     </section>
 
     <!-- Modal simple -->
     @if(productoSeleccionado){
-    <div class="modal" >
+    <div class="modal">
       <div class="modal-card">
         <button class="close" (click)="productoSeleccionado = null">✕</button>
         <div class="modal-grid">
@@ -55,10 +57,13 @@
             <p>Cantidad: {{ productoSeleccionado.cantidad }}</p>
             <p>Precio: C$ {{ productoSeleccionado.precio_venta }}</p>
             <div class="modal-actions">
-              <button class="primary" routerLink="../visitarperfil/{{productoSeleccionado.idUsuario}}">
+              <button
+                class="primary"
+                routerLink="../visitarperfil/{{ productoSeleccionado.idUsuario }}"
+              >
                 visitar vendedor
               </button>
-               <button class="what" >pedir por whatsapp</button>
+              <button class="what">pedir por whatsapp</button>
             </div>
           </div>
         </div>

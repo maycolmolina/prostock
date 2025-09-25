@@ -14,7 +14,7 @@
 
   /* ⚖️ Neutros */
   --color-neutral-dark: #1E293B; /* Textos principales */
-  --color-neutral: #64748B;      /* Textos secundarios */
+  --color-neutral: #ececec;      /* Textos secundarios */
   --color-bg-light: #F8FAFC;     /* Fondos principales */
   --color-white: #FFFFFF;        /* Tarjetas, elementos flotantes */
 }

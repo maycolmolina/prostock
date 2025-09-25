@@ -55,4 +55,26 @@ export class Asistente implements AfterViewChecked {
       this.isLoading = false;
     }
   }
+  async Sugestion(cadena:string) {
+    const mensaje = {
+      sms: cadena,
+      user: 'user',
+    };
+    this.mensajes.push(mensaje);
+
+    this.isLoading = true;
+    this.response = null;
+    const prompt = cadena;
+
+    try {
+      this.response = await this.geminiService.generateText(prompt);
+      const mensaje = {
+        sms: this.response,
+        user: 'bot',
+      };
+      this.mensajes.push(mensaje);
+    } finally {
+      this.isLoading = false;
+    }
+  }
 }

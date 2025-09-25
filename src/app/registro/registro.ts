@@ -5,9 +5,10 @@ import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angu
 import { Usuario } from '../objetos';
 import { Switalert2Service } from '../services/switalert2.service';
 import { Router } from '@angular/router';
+import { PiePagina } from '../pie-pagina/pie-pagina';
 @Component({
   selector: 'app-registro',
-  imports: [RouterLink,ReactiveFormsModule],
+  imports: [RouterLink,ReactiveFormsModule,PiePagina],
   templateUrl: './registro.html',
   styleUrl: './registro.css'
 })

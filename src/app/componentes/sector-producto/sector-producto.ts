@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { PiePagina } from '../../pie-pagina/pie-pagina';
 
 @Component({
   selector: 'app-sector-producto',
-  imports: [],
+  imports: [PiePagina],
   templateUrl: './sector-producto.html',
   styleUrl: './sector-producto.css'
 })

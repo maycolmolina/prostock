@@ -5,10 +5,11 @@ import { Switalert2Service } from '../../services/switalert2.service';
 import { Realtime } from '../../services/realtime';
 import { StorageService } from '../../services/localstorage.service';
 import { loginservice } from '../../services/login.service';
+import { PiePagina } from '../../pie-pagina/pie-pagina';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, RouterLink],
+  imports: [FormsModule, RouterLink,PiePagina],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
