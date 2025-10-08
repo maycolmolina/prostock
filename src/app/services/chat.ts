@@ -14,7 +14,7 @@ export class Chat {
     try {
       if(!this.model){
         const genAI = new GoogleGenerativeAI('AIzaSyDzVZhG7e15NJLSwGA-EuJpj0pZ67_w1Zk');
-        this.model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+        this.model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
         console.log('se inicio geminis actualmente')
       }
       const result = await this.model.generateContent(prompt);

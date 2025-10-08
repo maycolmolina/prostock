@@ -18,9 +18,6 @@ export class Login {
   password = '';
 
   constructor(
-    private ruta: Router,
-    private local: StorageService,
-    private realtime: Realtime,
     private alerta: Switalert2Service,
     private log: loginservice
   ) {}

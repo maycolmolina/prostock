@@ -1,0 +1,86 @@
+<div class="marketplace-container">
+  <header class="header">
+    <h1 class="logo">Marketplace</h1>
+    <button routerLink="../venderplantilla" class="publish-btn">+ Publicar Recurso</button>
+  </header>
+
+  <section class="banner">
+    <h2>¡Nuevos Recursos Disponibles!</h2>
+    <p>
+      Plantillas de producción optimizadas para el sector textil con 30% de descuento esta semana
+    </p>
+    <button class="offers-btn">Ver Ofertas</button>
+  </section>
+  <nav class="nav-tabs">
+    <a (click)="cambiar_vista('desc')" class="tab" [ngClass]="{ active: vista == 'desc' }"
+      >Recursos Descargables</a
+    >
+    <a (click)="cambiar_vista('')" class="tab" [ngClass]="{ active: vista == '' }"
+      >Proveedores Especializados</a
+    >
+    <a routerLink="../marketplace" class="tab">Venta de Productos</a>
+  </nav>
+  @if (vista=='desc') {
+  <div class="descargables">
+    <!-- ___________________________________________________________________________________ -->
+    <div class="cards-container">
+      @for (plantilla of plantillas; track plantilla) {
+      <div class="card">
+        <div
+          class="card-header"
+          [ngClass]="{
+            'color-purple': plantilla.categoria === 'Textil',
+            'color-green': plantilla.categoria === 'Madera',
+            'color-orange': plantilla.categoria === 'Cuero'
+          }"
+        >
+          <i
+            class="fa-solid"
+            [ngClass]="{
+              'fa-shirt': plantilla.categoria === 'Textil',
+              'fa-tree': plantilla.categoria === 'Madera',
+              'fa-ring': plantilla.categoria === 'Cuero'
+            }"
+          ></i>
+        </div>
+
+        <div class="card-body">
+          <span class="tag">{{ plantilla.categoria }}</span>
+
+          <h3>{{ plantilla.nombre }}</h3>
+          <p>{{ plantilla.descripcion }}</p>
+
+          <div class="stats">
+            <span>
+              <i class="fa-solid fa-download"></i>
+              {{ plantilla.descargasTotales }} descargas
+            </span>
+            <span><i class="fa-solid fa-star"></i> 4.8/5</span>
+          </div>
+
+          <div class="price" [ngClass]="{ free: plantilla.gratis }">
+            {{ plantilla.gratis ? 'Gratuito' : '$' + plantilla.precio }}
+          </div>
+
+          <div class="actions">
+            @if (!plantilla.gratis) {
+            <button class="btn btn-primary">
+              <i class="fa-solid fa-cart-shopping"></i> Comprar
+            </button>
+            } @if (plantilla.gratis) {
+            <button class="btn btn-success"><i class="fa-solid fa-download"></i> Descargar</button>
+            }
+            <button class="btn btn-outline"><i class="fa-solid fa-eye"></i> Vista Previa</button>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+
+    <!-- ___________________________________________________________________________________ -->
+  </div>
+  }@else {
+  <div class="proveedores"></div>
+  }
+  
+</div>

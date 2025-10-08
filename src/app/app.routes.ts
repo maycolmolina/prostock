@@ -16,6 +16,8 @@ import { IngresoProducto } from './componentes/ingreso-producto/ingreso-producto
 import { GestionProductos } from './componentes/gestion-productos/gestion-productos';
 import { Perfilvendedor } from './componentes/perfilvendedor/perfilvendedor';
 import { IngresoMadera } from './componentes/ingreso-madera/ingreso-madera';
+import { Marketprincipal } from './componentes/marketprincipal/marketprincipal';
+import { Venderplantilla } from './componentes/venderplantilla/venderplantilla';
 
 export const routes: Routes = [
     {path:'ajustes', component:Ajustes},
@@ -34,5 +36,7 @@ export const routes: Routes = [
     {path:'visitarperfil/:id', component:Perfilvendedor},
     {path:'gestionpro', component:GestionProductos},
     {path:'ingresoMadera', component:IngresoMadera},
+    {path:'marketprincipal', component:Marketprincipal},
+    {path:'venderplantilla', component:Venderplantilla},
     {path:'',component:Inicio}
 ];

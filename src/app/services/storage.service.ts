@@ -6,7 +6,6 @@ import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
 @Injectable({ providedIn: 'root' })
 export class GlobalbaseService {
-
   private static supabaseInstance: SupabaseClient;
   private supabase!: SupabaseClient;
   constructor(
@@ -20,10 +19,8 @@ export class GlobalbaseService {
         'https://kdhmnxsrabnysftbdzgo.supabase.co',
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtkaG1ueHNyYWJueXNmdGJkemdvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc2OTQ4NDQsImV4cCI6MjA3MzI3MDg0NH0.r5mLB3674rgLa4izzHYSM57dEyrtdgEBr8aiS057P50'
       );
-     
     }
     this.supabase = GlobalbaseService.supabaseInstance;
-
   }
 
   async repairData(data: any) {
@@ -41,15 +38,11 @@ export class GlobalbaseService {
     }
   }
 
- 
   cliente(): SupabaseClient {
     return this.supabase;
   }
 
   async subirImagen(file: File) {
-
-
-    
     const nombre = this.generarNombreAleatorio();
     const extension = file.name.split('.').pop();
     const ruta = `${nombre}.${extension}`;
@@ -65,9 +58,7 @@ export class GlobalbaseService {
     }
 
     // obtener URL pública (v1)
-    const { publicURL, error: urlError } = supabase.storage
-      .from('lexnova')
-      .getPublicUrl(ruta);
+    const { publicURL, error: urlError } = supabase.storage.from('lexnova').getPublicUrl(ruta);
 
     if (urlError) {
       throw urlError;
@@ -76,14 +67,12 @@ export class GlobalbaseService {
     return publicURL;
   }
 
-  async eliminarImg(url:any){
+  async eliminarImg(url: any) {
     const bucket = 'lexnova';
     const base = `https://kdhmnxsrabnysftbdzgo.supabase.co/storage/v1/object/public/${bucket}/`;
     const ruta = await url.replace(base, '');
-    console.log(ruta)
-    const { data, error } = await this.supabase.storage
-      .from(bucket)
-      .remove([ruta]);
+    console.log(ruta);
+    const { data, error } = await this.supabase.storage.from(bucket).remove([ruta]);
 
     if (error) throw error;
 
@@ -106,5 +95,4 @@ export class GlobalbaseService {
     }
     return nombreAleatorio;
   }
-
 }

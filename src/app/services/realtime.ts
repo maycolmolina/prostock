@@ -20,7 +20,6 @@ import { Auth, createUserWithEmailAndPassword } from '@angular/fire/auth';
   providedIn: 'root',
 })
 export class Realtime {
-  realtimeUrl = 'https://prostock2025-da706-default-rtdb.firebaseio.com/';
   token = '';
 
   async remove(key: string, nodo: string) {
