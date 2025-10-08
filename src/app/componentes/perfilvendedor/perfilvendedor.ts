@@ -40,7 +40,7 @@ export class Perfilvendedor  {
     }
   }
   cargar_productos(){
-    this.global.getMiPro(this.id).then(
+    this.global.getMiPro(this.id,'productos').then(
       objetoCom=>{
         if(objetoCom.exists()){
           this.mostrar=true;

@@ -45,7 +45,7 @@ h2 {
 
 .productos-table button {
   padding: 5px 10px;
-  margin: 0 2px;
+  margin: 2px 2px;
   border: none;
   border-radius: 3px;
   cursor: pointer;
@@ -61,26 +61,32 @@ h2 {
   color: white;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 700px) {
   .productos-table th,
   .productos-table td {
-    padding: 8px 5px;
+    padding: 2px 2px;
+    font-size: small;
   }
 
   .buscador {
     padding: 6px;
   }
+  .accion button {
+    margin: 10px 5px;
+    background-color: var(--color-primary);
+    padding: 2px 10px;
+    font-weight: 500;
+    font-size: small;
+  }
 }
 
-
-.accion{
+.accion {
   display: flex;
   align-items: center;
   justify-content: center;
-
 }
-.boton{
-  margin: 10px 30px ;
+.boton {
+  margin: 10px 30px;
   background-color: var(--color-primary);
   padding: 10px 30px;
   border: none;
@@ -88,22 +94,20 @@ h2 {
   color: var(--color-white);
   font-weight: 500;
 }
-
-
 /* ver------------------------------------------ */
 
-.verproducto{
+.verproducto {
   background-color: rgba(29, 29, 29, 0.8);
   z-index: 2;
   position: absolute;
   width: 98%;
-  top:0px;
+  top: 0px;
   padding: 20px;
   border-radius: 20px;
 }
-.cerrar{
+.cerrar {
   position: absolute;
-  right:-8px;
+  right: -8px;
   top: -14px;
   background-color: #e74c3c;
   color: #ddd;
@@ -114,79 +118,79 @@ h2 {
   cursor: pointer;
   transition: all 0.5s;
 }
-.cerrar:hover{
+.cerrar:hover {
   box-shadow: 0px 0px 12px rgb(255, 255, 255);
 }
 .card {
-      margin: auto;
-      background: linear-gradient(145deg, #102d7c, #071d4b);
-      color: white;
-      width: 350px;
-      border-radius: 15px;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
-      transition: transform 0.2s;
-      padding-top: 10px ;
-      position: relative;
-    }
+  margin: auto;
+  background: linear-gradient(145deg, #102d7c, #071d4b);
+  color: white;
+  width: 350px;
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s;
+  padding-top: 10px;
+  position: relative;
+}
 
-    /* .card:hover {
+/* .card:hover {
       transform: translateY(-5px);
     } */
 
-    .card img {
-      width: 100%;
-      height: 200px;
-      object-fit: contain;
-    }
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+}
 
-    .card-content {
-      padding: 20px;
-    }
+.card-content {
+  padding: 20px;
+}
 
-    .card-content h2 {
-      margin: 0;
-      font-size: 1.5rem;
-      margin-bottom: 10px;
-    }
+.card-content h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
 
-    .info {
-      margin: 5px 0;
-      font-size: 0.95rem;
-    }
+.info {
+  margin: 5px 0;
+  font-size: 0.95rem;
+}
 
-    .info span {
-      font-weight: bold;
-      color: #93c5fd;
-    }
+.info span {
+  font-weight: bold;
+  color: #93c5fd;
+}
 
-    .precio {
-      margin-top: 15px;
-      font-size: 1.2rem;
-      font-weight: bold;
-      color: #22c55e;
-    }
+.precio {
+  margin-top: 15px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #22c55e;
+}
 
-    .costo {
-      color: #f87171;
-      font-weight: bold;
-    }
-    .card-content2{
-      margin: 0;
-      font-size: 1.5rem;
-      margin-bottom: 10px;
-      background-color: #3498db;
-      color: #000;
-      padding: 10px;
-    }
-    .card-content2 .info{ 
-      font-size: 1.2rem;
-      background-color: #3498db;
-      color: #000;
-      padding: 10px;
-    }
-    .card-content2 .info span{ 
-      font-size: 1.2rem;
-      color: #000;
-      padding: 10px;
-      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    }
+.costo {
+  color: #f87171;
+  font-weight: bold;
+}
+.card-content2 {
+  margin: 0;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  background-color: #3498db;
+  color: #000;
+  padding: 10px;
+}
+.card-content2 .info {
+  font-size: 1.2rem;
+  background-color: #3498db;
+  color: #000;
+  padding: 10px;
+}
+.card-content2 .info span {
+  font-size: 1.2rem;
+  color: #000;
+  padding: 10px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}

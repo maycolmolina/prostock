@@ -59,7 +59,7 @@
           </div>
 
           <div class="price" [ngClass]="{ free: plantilla.gratis }">
-            {{ plantilla.gratis ? 'Gratuito' : '$' + plantilla.precio }}
+            {{ plantilla.gratis ? 'Gratuito' : 'C$' + plantilla.precio }}
           </div>
 
           <div class="actions">
@@ -68,7 +68,7 @@
               <i class="fa-solid fa-cart-shopping"></i> Comprar
             </button>
             } @if (plantilla.gratis) {
-            <button class="btn btn-success"><i class="fa-solid fa-download"></i> Descargar</button>
+            <button (click)="descargarArchivo(plantilla.urlFile)" class="btn btn-success"><i class="fa-solid fa-download"></i> Descargar</button>
             }
             <button class="btn btn-outline"><i class="fa-solid fa-eye"></i> Vista Previa</button>
           </div>

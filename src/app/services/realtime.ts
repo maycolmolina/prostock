@@ -48,6 +48,27 @@ export class Realtime {
       return '';
     }
   }
+  // __________________________________funcion para obtener la plantillas__________________
+
+  plantillas: Array<any> = [];
+  async getPlantillas() {
+    if (this.plantillas.length != 0) {
+      return this.plantillas;
+    }
+    const referencia = ref(this.db, 'plantillas');
+    const consulta = query(referencia);
+    const snap = await get(consulta);
+    if (snap.exists()) {
+      snap.forEach((shild) => {
+        const plantilla = shild.val();
+        plantilla.id = shild.key;
+        this.plantillas.push(plantilla);
+      });
+    }
+    return this.plantillas;
+  }
+
+  // __________________________________funcion para obtener la plantillas__________________
 
   async createuser(usuario: Usuario) {
     try {
@@ -85,11 +106,13 @@ export class Realtime {
     }
   }
 
-  getMiPro(idavisitar: string) {
-    const referencia = ref(this.db, 'productos');
+  getMiPro(idavisitar: string, nodo: string) {
+    const referencia = ref(this.db, nodo);
     const consulta = query(referencia, orderByChild('idUsuario'), equalTo(idavisitar));
     return get(consulta);
   }
+
+  // obtenr madera que esta en mi bodega_________________________
   maderas: Array<any> = [];
   async getMiMadera() {
     if (this.maderas.length != 0) {
@@ -108,6 +131,33 @@ export class Realtime {
     }
     return this.maderas;
   }
+  // obtener unicamente mis plantillas publicadas_________________________
+  Misplantillas: Array<any> = [];
+
+  setPlantilla(plantill:any){
+    this.Misplantillas=[]
+    this.Misplantillas=plantill;
+  }
+  async getMiplantilla() {
+    if (this.Misplantillas.length != 0) {
+      return this.Misplantillas;
+    }
+    const mikey = this.local.getItem('key');
+    const referencia = ref(this.db, 'plantillas');
+    const consulta = query(referencia, orderByChild('idUsuario'), equalTo(mikey));
+    const snap = await get(consulta);
+
+    if (snap.exists()) {
+      snap.forEach((shild) => {
+        const plantilla = shild.val();
+        plantilla.id = shild.key;
+        this.Misplantillas.push(plantilla);
+      });
+    }
+    return this.Misplantillas;
+  }
+
+  // fin de obtener unicamente mis plantillas publicadas_________________________
 
   compras: Array<any> = [];
   async obtenerventas() {
@@ -153,8 +203,8 @@ export class Realtime {
     }
   }
 
-  getProductos() {
-    const referencia = ref(this.db, 'productos');
+  getProductos(nodo: string) {
+    const referencia = ref(this.db, nodo);
     return get(referencia);
   }
   async obtenerusuario(correo: string): Promise<any> {

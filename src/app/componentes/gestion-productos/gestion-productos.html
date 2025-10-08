@@ -6,7 +6,7 @@
   <div class="accion">
     <button (click)="cambiarvista('madera')" class="boton btn-primary">Almacen_madera</button>
     <button (click)="cambiarvista('textil')" class="boton btn-primary">ropa</button>
-    <button (click)="cambiarvista('alimento')" class="boton btn-primary">alimento</button>
+    <button (click)="cambiarvista('plantillas')" class="boton btn-primary">MisPlantillas</button>
     <button (click)="cambiarvista('productoventa')" class="boton btn-primary">
       productos en venta
     </button>
@@ -33,7 +33,7 @@
           <td>{{ producto.cantidad }}</td>
           <td>
             <button (click)="verProducto(producto)">Ver</button>
-            <button (click)="eliminarProducto(producto.id, producto.urlimg)">Eliminar</button>
+            <button (click)="eliminarProducto(producto.id, producto.urlimg,'productos')">Eliminar</button>
           </td>
         </tr>
         }
@@ -44,7 +44,7 @@
       <thead>
         <tr>
           <th>tipo</th>
-          <th>presentacion </th>
+          <th>presentacion</th>
           <th>cantidad</th>
           <th>precio por</th>
           <th>proveedor</th>
@@ -55,13 +55,13 @@
         @for (maderau of madera; track maderau.id) {
         <tr>
           <td>{{ maderau.tipo }}</td>
-          <td>{{ maderau.presentacion}}</td>
-          <td>{{ maderau.cantidad_u_m +' '+ maderau. unidad_medida }}</td>
-          <td>{{maderau.precio_unidad_medida+'C$ por cada '+maderau. unidad_medida }}</td>
+          <td>{{ maderau.presentacion }}</td>
+          <td>{{ maderau.cantidad_u_m + ' ' + maderau.unidad_medida }}</td>
+          <td>{{ maderau.precio_unidad_medida + 'C$ por cada ' + maderau.unidad_medida }}</td>
           <td>{{ maderau.unidad }}</td>
           <td>
-            <button >Aumentar </button>
-            <button >Decrementar</button>
+            <button>Aumentar</button>
+            <button>Decrementar</button>
           </td>
         </tr>
         }
@@ -71,7 +71,44 @@
     }@else if (vista==='textil') {
     <h1>textil</h1>
     }@else{
-    <h1>alimento</h1>
+    <!--_____________________ vista de platillas _____________________________________ -->
+    <div class="productos-table">
+      <h2>Archivos disponibles</h2>
+      <table class="tabla-archivos">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Categoría</th>
+            <th>Descripción</th>
+            <th>Precio</th>
+            <th>Descargas</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @for (plantilla of plantillas; track $index) {
+          <tr>
+            <td>{{plantilla.nombre}}</td>
+            <td>{{plantilla.categoria}}</td>
+            <td>{{plantilla.descripcion}}</td>
+            @if(plantilla.gratis){
+              <td>Gratis</td>
+            }@else {
+              <td>{{plantilla.precio}}</td>
+            }
+            
+            <td>{{plantilla.descargasTotales}}</td>
+            <td>
+              <button (click)="descargarArchivo(plantilla.urlFile)">ver</button>
+              <button (click)="eliminarProducto(plantilla.id, plantilla.urlFile,'plantillas')" >x</button>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    <!--_____________________ vista de platillas _____________________________________ -->
     }
   </div>
   @if (vistapro==true) {

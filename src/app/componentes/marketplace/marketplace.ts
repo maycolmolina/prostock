@@ -33,8 +33,6 @@ export class Marketplace implements OnInit{
   verProducto(p: any) {
     this.productoSeleccionado = p;
   }
-
-
   comprarAhora(p: any) {
     alert(`Comprar ahora: ${p.nombre}`);
   }
@@ -44,8 +42,8 @@ export class Marketplace implements OnInit{
   constructor(
     private global:Realtime
   ){}
-  async obtenerpro() {
-    const snapshot = await this.global.getProductos();
+  async obtenerpro() { 
+    const snapshot = await this.global.getProductos('productos');
     if (snapshot.exists()) {
       this.productos = [];
       snapshot.forEach((dato) => {

@@ -1,6 +1,7 @@
 import { NgClass } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { Realtime } from '../../services/realtime';
 
 
 @Component({
@@ -9,44 +10,31 @@ import { RouterLink } from '@angular/router';
   templateUrl: './marketprincipal.html',
   styleUrl: './marketprincipal.css'
 })
-export class Marketprincipal {
+export class Marketprincipal implements OnInit {
+ 
   vista='desc'
-  plantillas: any[] = [
-    {
-      nombre: 'Plantilla Optimizada Camiseta Básica',
-      descripcion: 'esta plantilla es para hacer una camiseta que te quede mas piola de lo que te imaginas',
-      categoria: 'Textil',
-      descargasTotales: 245,
-      gratis: false,
-      precio: 29.99,
-      urlFile: 'https://miweb.com/plantillas/camiseta-basica.pdf',
-      idUser: 1
-    },
-    {
-      nombre: 'Guía Completa Acabados Madereros',
-      descripcion: 'Técnicas profesionales de acabado, fórmulas de barnices y tiempos de secado optimizados.',
-      categoria: 'Madera',
-      descargasTotales: 189,
-      gratis: false,
-      precio: 34.99,
-      urlFile: 'https://miweb.com/plantillas/guia-madera.pdf',
-      idUser: 2
-    },
-    {
-      nombre: 'Plantillas Básicas Marroquinería',
-      descripcion: 'Pack inicial con patrones para carteras, cinturones y fundas. Ideal para emprendedores.',
-      categoria: 'Cuero',
-      descargasTotales: 512,
-      gratis: true,
-      precio: 0,
-      urlFile: 'https://miweb.com/plantillas/marroquineria.pdf',
-      idUser: 3
-    }
-  ];
+  plantillas: any[] = [];
 
   cambiar_vista(cadena:string){
     this.vista=cadena
   }
+   ngOnInit(): void {
+    this.cargarpro();
+  } 
+  async cargarpro(){
+    this.plantillas= await this.realtime.getPlantillas()
+  }
 
+
+  descargarArchivo(enlace:string) {
+  const link = document.createElement('a');
+  link.href = enlace;
+  link.download = 'plantilla.pdf'; // nombre sugerido
+  link.target = '_blank'; // abre en nueva pestaña
+  link.setAttribute('rel', 'noopener noreferrer');
+  link.click();
+  }
+
+  constructor(private realtime:Realtime){}
 
 }
