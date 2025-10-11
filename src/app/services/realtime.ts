@@ -105,11 +105,30 @@ export class Realtime {
       }
     }
   }
-
   getMiPro(idavisitar: string, nodo: string) {
     const referencia = ref(this.db, nodo);
     const consulta = query(referencia, orderByChild('idUsuario'), equalTo(idavisitar));
     return get(consulta);
+  }
+  // obtener mis productos de realtima de ser necesario__________________
+  Misproductos: Array<any> = [];
+  async getMiProducto() {
+    if (this.Misproductos.length != 0) {
+      return this.Misproductos;
+    }
+    const mikey = this.local.getItem('key');
+    const referencia = ref(this.db, 'productos');
+    const consulta = query(referencia, orderByChild('idUsuario'), equalTo(mikey));
+    const snap = await get(consulta);
+
+    if (snap.exists()) {
+      snap.forEach((shild) => {
+        const pro = shild.val();
+        pro.id = shild.key;
+        this.Misproductos.push(pro);
+      });
+    }
+    return this.Misproductos;
   }
 
   // obtenr madera que esta en mi bodega_________________________

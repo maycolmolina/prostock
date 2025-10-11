@@ -4,10 +4,10 @@
   <!-- Buscador -->
   <input type="text" placeholder="Buscar producto..." [(ngModel)]="filtro" class="buscador" />
   <div class="accion">
-    <button (click)="cambiarvista('madera')" class="boton btn-primary">Almacen_madera</button>
-    <button (click)="cambiarvista('textil')" class="boton btn-primary">ropa</button>
-    <button (click)="cambiarvista('plantillas')" class="boton btn-primary">MisPlantillas</button>
-    <button (click)="cambiarvista('productoventa')" class="boton btn-primary">
+    <button (click)="cambiarvista('madera')" class="boton btn-primary" [ngClass]="{'active':vista=='madera'}" >Almacen_madera</button>
+    <button (click)="cambiarvista('textil')" class="boton btn-primary" [ngClass]="{'active':vista=='textil'}">ropa</button>
+    <button (click)="cambiarvista('plantillas')" class="boton btn-primary" [ngClass]="{'active':vista=='plantillas'}">MisPlantillas</button>
+    <button (click)="cambiarvista('productoventa')" class="boton btn-primary" [ngClass]="{'active':vista=='productoventa'}">
       productos en venta
     </button>
   </div>

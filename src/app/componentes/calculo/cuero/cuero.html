@@ -17,19 +17,79 @@
           <option value="custom">Personalizado</option>
         </select>
       </div>
-
+      <!-- segun el producto seleccionado -->
+      <!-- Condicionales por tipo de producto -->
+      @if (productType == 'shoes') {
       <div class="form-group">
-        <label>Talla / Dimensiones:</label>
+        <label>Talla:</label>
         <select [(ngModel)]="size" (change)="calculateLeather()">
-          <option value="xs">XS</option>
-          <option value="s">S</option>
-          <option value="m">M</option>
-          <option value="l">L</option>
-          <option value="xl">XL</option>
-          <option value="xxl">XXL</option>
+          <option value="">Seleccione...</option>
+          @for (n of [36,37,38,39,40,41,42,43,44]; track n) {
+          <option [value]="n">{{ n }}</option>
+          }
         </select>
       </div>
-
+      } @else if (productType == 'belt') {
+      <div class="form-group">
+        <label>Longitud:</label>
+        <select [(ngModel)]="size" (change)="calculateLeather()">
+          <option value="">Seleccione...</option>
+          @for (n of ['90cm','100cm','110cm','120cm','130cm','140cm']; track n) {
+          <option [value]="n">{{ n }}</option>
+          }
+        </select>
+      </div>
+      } @else if (productType == 'wallet') {
+      <div class="form-group">
+        <label>Modelo:</label>
+        <select [(ngModel)]="size" (change)="calculateLeather()">
+          <option value="">Seleccione...</option>
+          @for (n of ['monedero','tarjetero','billetera','doble']; track n) {
+          <option [value]="n">{{ n }}</option>
+          }
+        </select>
+      </div>
+      } @else if (productType == 'bag') {
+      <div class="form-group">
+        <label>Tamaño / Dimensiones:</label>
+        <select [(ngModel)]="size" (change)="calculateLeather()">
+          <option value="">Seleccione...</option>
+          @for (n of ['pequeña','mediana','grande','viajera']; track n) {
+          <option [value]="n">{{ n }}</option>
+          }
+        </select>
+      </div>
+      } @else if (productType == 'jacket') {
+      <div class="form-group">
+        <label>Talla:</label>
+        <select [(ngModel)]="size" (change)="calculateLeather()">
+          <option value="">Seleccione...</option>
+          @for (n of ['xs','s','m','l','xl','xxl']; track n) {
+          <option [value]="n">{{ n | uppercase }}</option>
+          }
+        </select>
+      </div>
+      } @else if (productType == 'gloves') {
+      <div class="form-group">
+        <label>Talla:</label>
+        <select [(ngModel)]="size" (change)="calculateLeather()">
+          <option value="">Seleccione...</option>
+          @for (n of [6,7,8,9,10,11]; track n) {
+          <option [value]="n">{{ n }}</option>
+          }
+        </select>
+      </div>
+      } @else if (productType == 'custom') {
+      <div class="form-group">
+        <label>Dimensiones:</label>
+        <select [(ngModel)]="size" (change)="calculateLeather()">
+          <option value="">Seleccione...</option>
+          @for (n of ['20x20cm','25x25cm','30x30cm','35x35cm','40x40cm','50x50cm']; track n) {
+          <option [value]="n">{{ n }}</option>
+          }
+        </select>
+      </div>
+      }
       <div class="form-group">
         <label>Tipo de Cuero:</label>
         <select [(ngModel)]="leatherType" (change)="calculateLeather()">
@@ -43,18 +103,24 @@
 
       <div class="form-group">
         <label>Tamaño del cuero (pies cuadrados):</label>
-        <input type="number" [(ngModel)]="hideSize" min="20" max="100">
+        <input type="number" [(ngModel)]="hideSize" min="20" max="100" />
       </div>
 
       <div class="form-group">
         <label>Cantidad de productos:</label>
-        <input type="number" [(ngModel)]="quantity" (input)="calculateLeather()" min="1" max="1000">
+        <input
+          type="number"
+          [(ngModel)]="quantity"
+          (input)="calculateLeather()"
+          min="1"
+          max="1000"
+        />
       </div>
 
       <div class="leather-pattern">
         <label>Complejidad del diseño:</label>
-        <input type="range" [(ngModel)]="complexity" (input)="calculateLeather()" min="1" max="5">
-        <div style="display: flex; justify-content: space-between;">
+        <input type="range" [(ngModel)]="complexity" (input)="calculateLeather()" min="1" max="5" />
+        <div style="display: flex; justify-content: space-between">
           <span>Simple</span>
           <span>Moderado</span>
           <span>Complejo</span>
@@ -68,15 +134,27 @@
       <div class="result-box">
         <h2>Cuero requerido:</h2>
         <div class="result-value">{{ resultValue }}</div>
-        
+
         <div class="result-details">
           <h3>Desglose del cálculo:</h3>
-          <div class="detail-item"><span>Producto:</span><span>{{ detailProduct }}</span></div>
-          <div class="detail-item"><span>Talla:</span><span>{{ detailSize }}</span></div>
-          <div class="detail-item"><span>Consumo por unidad:</span><span>{{ detailPerProduct }}</span></div>
-          <div class="detail-item"><span>Tipo de cuero:</span><span>{{ detailLeatherType }}</span></div>
-          <div class="detail-item"><span>Cantidad:</span><span>{{ detailQuantity }}</span></div>
-          <div class="detail-item"><span>Pérdida por diseño:</span><span>{{ detailWaste }}</span></div>
+          <div class="detail-item">
+            <span>Producto:</span><span>{{ detailProduct }}</span>
+          </div>
+          <div class="detail-item">
+            <span>Talla:</span><span>{{ detailSize }}</span>
+          </div>
+          <div class="detail-item">
+            <span>Consumo por unidad:</span><span>{{ detailPerProduct }}</span>
+          </div>
+          <div class="detail-item">
+            <span>Tipo de cuero:</span><span>{{ detailLeatherType }}</span>
+          </div>
+          <div class="detail-item">
+            <span>Cantidad:</span><span>{{ detailQuantity }}</span>
+          </div>
+          <div class="detail-item">
+            <span>Pérdida por diseño:</span><span>{{ detailWaste }}</span>
+          </div>
         </div>
 
         <div class="leather-suggestion">
@@ -85,7 +163,8 @@
         </div>
 
         <div class="waste-note">
-          <i class="fas fa-info-circle"></i> <strong>Nota:</strong> El cálculo incluye un 15% adicional para pérdidas por defectos del cuero y cortes.
+          <i class="fas fa-info-circle"></i> <strong>Nota:</strong> El cálculo incluye un 15%
+          adicional para pérdidas por defectos del cuero y cortes.
         </div>
       </div>
     </div>

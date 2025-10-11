@@ -3,12 +3,11 @@
   flex-direction: row;
   padding: 5px 60px;
   align-items: center;
-  /* border-bottom: rgb(40, 40, 107) solid 1px */
   box-shadow: 0px 1px 5px rgb(144, 140, 140);
 }
 .encabezado h2{
   font-weight: 800;
-  background:  #1d27b6;
+  background: var(--color-primary-dark);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;

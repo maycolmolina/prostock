@@ -18,9 +18,11 @@ import { Perfilvendedor } from './componentes/perfilvendedor/perfilvendedor';
 import { IngresoMadera } from './componentes/ingreso-madera/ingreso-madera';
 import { Marketprincipal } from './componentes/marketprincipal/marketprincipal';
 import { Venderplantilla } from './componentes/venderplantilla/venderplantilla';
+import { Notfound } from './componentes/notfound/notfound';
 
 export const routes: Routes = [
     {path:'ajustes', component:Ajustes},
+    {path:'', component:Inicio},
     {path:'calculadora', component:Calculadora},
     {path:'asistente', component:Asistente},
     {path:'login', component:Login},
@@ -38,5 +40,5 @@ export const routes: Routes = [
     {path:'ingresoMadera', component:IngresoMadera},
     {path:'marketprincipal', component:Marketprincipal},
     {path:'venderplantilla', component:Venderplantilla},
-    {path:'',component:Inicio}
+    {path:'**', component:Notfound}
 ];
