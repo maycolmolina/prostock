@@ -133,29 +133,50 @@ export class Realtime {
 
   // obtenr madera que esta en mi bodega_________________________
   maderas: Array<any> = [];
-  async getMiMadera() {
-    if (this.maderas.length != 0) {
-      return this.maderas;
+  cueros: Array<any> = [];
+
+  async getMiBod(nodo: string) {
+    if (nodo === 'Madera') {
+      if (this.maderas.length != 0) {
+        return this.maderas;
+      }
+    } else if (nodo === 'Cuero') {
+      if (this.cueros.length != 0) {
+        return this.cueros;
+      }
     }
     const mikey = this.local.getItem('key');
-    const referencia = ref(this.db, 'Madera');
+    const referencia = ref(this.db, nodo);
     const consulta = query(referencia, orderByChild('id_usuario'), equalTo(mikey));
     const snap = await get(consulta);
+
     if (snap.exists()) {
       snap.forEach((shild) => {
-        const madera = shild.val();
-        madera.id = shild.key;
-        this.maderas.push(madera);
+        if (nodo === 'Madera') {
+          const madera = shild.val();
+          madera.id = shild.key;
+          this.maderas.push(madera);
+        } else if (nodo === 'Cuero') {
+          const cuero = shild.val();
+          cuero.id = shild.key;
+          this.cueros.push(cuero);
+        }
       });
     }
-    return this.maderas;
+    if (nodo === 'Madera') {
+      return this.maderas;
+    } else if (nodo === 'Cuero') {
+      return this.cueros;
+    } else {
+      return [];
+    }
   }
   // obtener unicamente mis plantillas publicadas_________________________
   Misplantillas: Array<any> = [];
 
-  setPlantilla(plantill:any){
-    this.Misplantillas=[]
-    this.Misplantillas=plantill;
+  setPlantilla(plantill: any) {
+    this.Misplantillas = [];
+    this.Misplantillas = plantill;
   }
   async getMiplantilla() {
     if (this.Misplantillas.length != 0) {
@@ -176,7 +197,7 @@ export class Realtime {
     return this.Misplantillas;
   }
 
-  // fin de obtener unicamente mis plantillas publicadas_________________________
+  // fin de obtener el resgistro de ventas de bodega_________________________
 
   compras: Array<any> = [];
   async obtenerventas() {
@@ -221,6 +242,51 @@ export class Realtime {
       return this.compras;
     }
   }
+
+  compras_c: Array<any> = [];
+  async obtenerventasCuero() {
+    if (this.compras_c.length != 0) {
+      return this.compras_c;
+    }
+    try {
+      // obtengo mi id
+      const mikey = this.local.getItem('key');
+      const referencia = ref(this.db, 'compra_Cuero');
+      const consulta = query(referencia, orderByChild('id_usuario'), equalTo(mikey));
+      const snap = await get(consulta);
+      if (snap.exists()) {
+        const ventasArray: any = [];
+        snap.forEach((shildsnap) => {
+          ventasArray.push(shildsnap.val());
+        });
+        for (const venta of ventasArray) {
+          const cueroref = ref(this.db, `Cuero/${venta.id_pro}`);
+          const snapCuero = await get(cueroref);
+
+          if (snapCuero.exists()) {
+            const Cuero = snapCuero.val();
+            const compraunica = {
+              tipo: Cuero.tipo,
+              cantidad_actual: Cuero.cantidad,
+              proveedor: Cuero.proveedor,
+              calidad: Cuero.calidad,
+              precioTotal: venta.precio_total,
+              fecha: venta.fecha,
+              cantidad_comprada: venta.cantidad,
+              unidad_medida: Cuero.unidad_medida,
+            };
+            this.compras_c.push(compraunica);
+          } else {
+            console.log('No se encontró la madera');
+          }
+        }
+      }
+    } finally {
+      return this.compras_c;
+    }
+  }
+
+  // __________________________________________________________________
 
   getProductos(nodo: string) {
     const referencia = ref(this.db, nodo);

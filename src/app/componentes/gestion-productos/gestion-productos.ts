@@ -29,7 +29,7 @@ export class GestionProductos implements OnInit {
       proveedor: '',
     },
   ];
-
+   cuero: any[] = [];
   plantillas: any[] = [];
   descargarArchivo(enlace:string) {
   const link = document.createElement('a');
@@ -47,9 +47,12 @@ export class GestionProductos implements OnInit {
   async cambiarvista(cadena: string) {
     this.vista = cadena;
     if (cadena === 'madera') {
-      this.madera = await this.global.getMiMadera();
+      this.madera = await this.global.getMiBod('Madera');
     }else if(cadena==='plantillas'){
       this.plantillas=await this.global.getMiplantilla()
+    }else if(cadena==='cuero'){
+      this.cuero = await this.global.getMiBod('Cuero');
+      console.log(this.cuero)
     }
   }
   async obtenerpro() {
@@ -68,7 +71,6 @@ export class GestionProductos implements OnInit {
   verProducto(producto: any) {
     this.productounico = {};
     this.productounico = this.productos.find((p) => p.id === producto.id);
-    console.log(producto.id);
     this.vistapro = true;
   }
   cerra() {

@@ -1,7 +1,10 @@
 <div class="container">
   <!-- Perfil -->
   <div class="perfil">
-    <img src="https://tse3.mm.bing.net/th/id/OIP.Dcmvj77Aeroc6HDfO26jlQHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Foto de perfil" />
+    <img
+      src="https://tse3.mm.bing.net/th/id/OIP.Dcmvj77Aeroc6HDfO26jlQHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
+      alt="Foto de perfil"
+    />
     <div>
       <h1>{{ usuario.nombre }}</h1>
       <p>{{ usuario.tipo }}</p>
@@ -15,11 +18,31 @@
   <!-- Accesos rápidos -->
   <div class="cards">
     @for (acceso of accesos; track $index) {
-        <div class="card"  >
-        <h2>{{ acceso.titulo }}</h2>
-        <a [routerLink]="acceso.link">accion</a>
-        </div>
+    <div class="card">
+      <h2>{{ acceso.titulo }}</h2>
+      @if (acceso.titulo==='Bodega') {
+      <a (click)="abrirModal()">{{ acceso.texbtn }}</a>
+      }@else {
+      <a [routerLink]="acceso.link">{{ acceso.texbtn }}</a>
+      }
+    </div>
     }
   </div>
 </div>
 
+<!-- ventana modal________________ -->
+<div class="modal" [class.active]="mostrarModal">
+  <div class="modal-content">
+    <button class="cerrar" (click)="cerrarModal()">
+      <i class="fas fa-times"></i>
+    </button>
+
+    <h2><i class="fas fa-box-open"></i> Selecciona tipo de bodega</h2>
+
+    <div class="opciones">
+    <button [routerLink]="'/ingresoMadera'"  class="btn-opcion madera"><i class="fas fa-tree"></i> Madera</button>
+
+      <button routerLink="/ingresoCuero" class="btn-opcion cuero"><i class="fas fa-tshirt"></i>Cuero</button>
+    </div>
+  </div>
+</div>

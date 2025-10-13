@@ -4,10 +4,32 @@
   <!-- Buscador -->
   <input type="text" placeholder="Buscar producto..." [(ngModel)]="filtro" class="buscador" />
   <div class="accion">
-    <button (click)="cambiarvista('madera')" class="boton btn-primary" [ngClass]="{'active':vista=='madera'}" >Almacen_madera</button>
-    <button (click)="cambiarvista('textil')" class="boton btn-primary" [ngClass]="{'active':vista=='textil'}">ropa</button>
-    <button (click)="cambiarvista('plantillas')" class="boton btn-primary" [ngClass]="{'active':vista=='plantillas'}">MisPlantillas</button>
-    <button (click)="cambiarvista('productoventa')" class="boton btn-primary" [ngClass]="{'active':vista=='productoventa'}">
+    <button
+      (click)="cambiarvista('madera')"
+      class="boton btn-primary"
+      [ngClass]="{ active: vista == 'madera' }"
+    >
+      Almacen_madera
+    </button>
+    <button
+      (click)="cambiarvista('cuero')"
+      class="boton btn-primary"
+      [ngClass]="{ active: vista == 'cuero' }"
+    >
+      Cuero
+    </button>
+    <button
+      (click)="cambiarvista('plantillas')"
+      class="boton btn-primary"
+      [ngClass]="{ active: vista == 'plantillas' }"
+    >
+      MisPlantillas
+    </button>
+    <button
+      (click)="cambiarvista('productoventa')"
+      class="boton btn-primary"
+      [ngClass]="{ active: vista == 'productoventa' }"
+    >
       productos en venta
     </button>
   </div>
@@ -33,7 +55,9 @@
           <td>{{ producto.cantidad }}</td>
           <td>
             <button (click)="verProducto(producto)">Ver</button>
-            <button (click)="eliminarProducto(producto.id, producto.urlimg,'productos')">Eliminar</button>
+            <button (click)="eliminarProducto(producto.id, producto.urlimg, 'productos')">
+              Eliminar
+            </button>
           </td>
         </tr>
         }
@@ -68,12 +92,43 @@
       </tbody>
     </table>
 
-    }@else if (vista==='textil') {
-    <h1>textil</h1>
+    }@else if (vista==='cuero') {
+    <div class="productos-table">
+      <h2>Almacen de cuero</h2>
+      <table class="tabla-archivos">
+        <thead>
+          <tr>
+            <th>tipo</th>
+            <th>calidad</th>
+            <th>cantidad</th>
+            <th>Precio por unidad</th>
+            <th>proveedor</th>
+            <th>acciones</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @for (c of cuero; track $index) {
+          <tr>
+            <td>{{ c.tipo }}</td>
+            <td>{{ c.calidad }}</td>
+            <td>{{ c.cantidad+' '+c.unidad_medida }}</td>
+            <td>{{ c.precio_unidad }}</td>
+            <td>{{ c.proveedor }}</td>
+            <td>
+              <button>Aumentar</button>
+              <button>Decrementar</button>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
     }@else{
     <!--_____________________ vista de platillas _____________________________________ -->
     <div class="productos-table">
-      <h2>Archivos disponibles</h2>
+      <h2>plantillas disponibles</h2>
       <table class="tabla-archivos">
         <thead>
           <tr>
@@ -89,19 +144,21 @@
         <tbody>
           @for (plantilla of plantillas; track $index) {
           <tr>
-            <td>{{plantilla.nombre}}</td>
-            <td>{{plantilla.categoria}}</td>
-            <td>{{plantilla.descripcion}}</td>
+            <td>{{ plantilla.nombre }}</td>
+            <td>{{ plantilla.categoria }}</td>
+            <td>{{ plantilla.descripcion }}</td>
             @if(plantilla.gratis){
-              <td>Gratis</td>
+            <td>Gratis</td>
             }@else {
-              <td>{{plantilla.precio}}</td>
+            <td>{{ plantilla.precio }}</td>
             }
-            
-            <td>{{plantilla.descargasTotales}}</td>
+
+            <td>{{ plantilla.descargasTotales }}</td>
             <td>
               <button (click)="descargarArchivo(plantilla.urlFile)">ver</button>
-              <button (click)="eliminarProducto(plantilla.id, plantilla.urlFile,'plantillas')" >x</button>
+              <button (click)="eliminarProducto(plantilla.id, plantilla.urlFile, 'plantillas')">
+                x
+              </button>
             </td>
           </tr>
           }

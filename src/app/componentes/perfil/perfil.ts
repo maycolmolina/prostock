@@ -10,6 +10,8 @@ import { StorageService } from '../../services/localstorage.service';
 })
 export class Perfil implements OnInit{
 
+  mostrarModal=false;
+
   usuario = {
     nombre: '',
     tipo: '',
@@ -17,12 +19,17 @@ export class Perfil implements OnInit{
     correo: ''
   };
    accesos = [
-    { titulo: 'Ingresar Productos', link: '../ingresarpro' },
-    { titulo: 'Mi Inventario', link: '../gestionpro' },
-    { titulo: 'facturacion', link: '/facturacion' },
-    { titulo: 'Bodega', link: '/ingresoMadera' }
+    { titulo: 'Ingresar Productos', link: '../ingresarpro'  ,texbtn:'publicar'  },
+    { titulo: 'Mi Inventario', link: '../gestionpro'  ,texbtn:'ver Insumos'  },
+    { titulo: 'facturacion', link: '/facturacion'  ,texbtn:'reportes'  },
+    { titulo: 'Bodega', link: '/ingresoMadera'   ,texbtn:'ingresar a bodega'  }
   ];
-  
+  abrirModal(){
+    this.mostrarModal=true;
+  }
+  cerrarModal(){
+    this.mostrarModal=false;
+  }
   ngOnInit(): void {
     this.usuario=this.local.getItem('user');
      if(this.usuario===null){

@@ -11,14 +11,19 @@ import { StorageService } from '../services/localstorage.service';
 export class MenuNavegacion {
 
 
+  user:any;
+
   constructor(private local:StorageService){}
 
   islogin(){
-    if(this.local.getItem('user')!== null){
+    this.user=this.local.getItem('user')
+    console.log('user')
+    if(this.user!== null){
       return true
     }else{
       return false
     }
   }
+  
 
 }

@@ -1,0 +1,103 @@
+<form class="form-prod fw-bold" (ngSubmit)="onSubmit()" #cueroForm="ngForm" novalidate>
+  <h2 class="fw-bold">Ingreso de Cuero a Bodega</h2>
+
+  <label class="field">
+    <span>Tipo de cuero</span>
+    <select name="tipo" [(ngModel)]="Cuero.tipo" #tipo="ngModel" required>
+      <option value="">Selecciona el tipo de cuero</option>
+      @for (c of tipos; track c) {
+        <option [value]="c">{{ c }}</option>
+      }
+    </select>
+    @if (tipo.invalid && (tipo.dirty || tipo.touched)) {
+      <small class="error">Selecciona un tipo de cuero.</small>
+    }
+  </label>
+
+  <label class="field">
+    <span>Calidad</span>
+    <select name="calidad" [(ngModel)]="Cuero.calidad" #calidad="ngModel" required>
+      <option value="">Selecciona la calidad</option>
+      @for (q of calidades; track q) {
+        <option [value]="q">{{ q }}</option>
+      }
+    </select>
+    @if (calidad.invalid && (calidad.dirty || calidad.touched)) {
+      <small class="error">Selecciona una calidad válida.</small>
+    }
+  </label>
+
+  <label class="field">
+    <span>Proveedor</span>
+    <input
+      name="proveedor"
+      [(ngModel)]="Cuero.proveedor"
+      required
+      minlength="3"
+      #proveedor="ngModel"
+    />
+    @if (proveedor.invalid && (proveedor.dirty || proveedor.touched)) {
+      <small class="error">Ingrese el nombre del proveedor correctamente.</small>
+    }
+  </label>
+
+  <label class="field">
+    <span>Fecha</span>
+    <input type="date" name="fecha" [(ngModel)]="fechaHoy" #fecha="ngModel" required />
+    @if (fecha.invalid && (fecha.dirty || fecha.touched)) {
+      <small class="error">Ingrese una fecha válida.</small>
+    }
+  </label>
+
+  <div class="row">
+    <label class="field small">
+      <span>Unidad de medida</span>
+      <select name="unidad" [(ngModel)]="Cuero.unidad_medida" #unidad="ngModel" required>
+        <option value="">Selecciona unidad</option>
+        @for (u of unidades; track u) {
+          <option [value]="u">{{ u }}</option>
+        }
+      </select>
+      @if (unidad.invalid && (unidad.dirty || unidad.touched)) {
+        <small class="error">Selecciona una unidad válida.</small>
+      }
+    </label>
+
+    <label class="field small">
+      <span>Cantidad ({{ Cuero.unidad_medida || 'unidad' }})</span>
+      <input
+        type="number"
+        name="cantidad"
+        [(ngModel)]="Cuero.cantidad"
+        #cantidad="ngModel"
+        required
+        min="0"
+        step="0.01"
+      />
+      @if (cantidad.invalid && (cantidad.dirty || cantidad.touched)) {
+        <small class="error">Ingrese una cantidad válida.</small>
+      }
+    </label>
+
+    <label class="field small">
+      <span>Precio por {{ Cuero.unidad_medida || 'unidad' }}</span>
+      <input
+        type="number"
+        name="precio"
+        [(ngModel)]="Cuero.precio_unidad"
+        #precio="ngModel"
+        required
+        min="1"
+      />
+      @if (precio.invalid && (precio.dirty || precio.touched)) {
+        <small class="error">Ingrese un precio válido.</small>
+      }
+    </label>
+  </div>
+
+  <div class="actions">
+    <button type="submit" [disabled]="cueroForm.invalid">Guardar compra</button>
+    <button type="button" class="ghost" (click)="resetForm(cueroForm)">Limpiar</button>
+  </div>
+</form>
+
