@@ -5,11 +5,12 @@ import { Realtime } from '../../services/realtime';
 import { GlobalbaseService } from '../../services/storage.service';
 import { StorageService } from '../../services/localstorage.service';
 import { Switalert2Service } from '../../services/switalert2.service';
+import { ComponenteCarga } from '../componente-carga/componente-carga';
 
 @Component({
   selector: 'app-ingreso-cuero',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule,ComponenteCarga],
   templateUrl: './ingreso-cuero.html',
   styleUrl: './ingreso-cuero.css',
 })
@@ -17,7 +18,7 @@ export class IngresoCuero {
   tipos = ['Cuero vacuno', 'Cuero caprino', 'Cuero porcino', 'Cuero sintético'];
   calidades = ['Alta', 'Media', 'Baja'];
   unidades = ['kilogramo', 'metro cuadrado', 'pieza'];
-
+  cargando=false;
   fechaHoy = '';
   Cuero = {
     tipo: '',
@@ -43,6 +44,7 @@ export class IngresoCuero {
 
   async onSubmit() {
     try {
+      this.cargando=true;
       const id = await this.realtime.bodega(this.Cuero, 'Cuero');
       await this.realtime.bodega(
         {
@@ -55,11 +57,12 @@ export class IngresoCuero {
         },
         'compra_Cuero'
       );
+      this.cargando=false;
       this.alerta.alertaExito('Se ingresó la compra de cuero correctamente.');
       this.resetForm();
     } catch (error) {
-      console.error('Error al guardar cuero:', error);
       this.alerta.alertaerror('Hubo un problema al guardar la compra.');
+      this.cargando=false;
     }
   }
 

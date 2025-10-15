@@ -5,16 +5,18 @@ import { GlobalbaseService } from '../../services/storage.service';
 import { StorageService } from '../../services/localstorage.service';
 import { Switalert2Service } from '../../services/switalert2.service';
 import { FormsModule } from '@angular/forms';
+import { ComponenteCarga } from '../componente-carga/componente-carga';
 
 @Component({
   selector: 'app-ingreso-madera',
-  imports: [FormsModule],
+  imports: [FormsModule,ComponenteCarga],
   templateUrl: './ingreso-madera.html',
   styleUrl: './ingreso-madera.css'
 })
 export class IngresoMadera {
+  cargando=false
   presentaciones = ['2x2', '2x4', 'tablones','viga'];
-  tipos = ['cedro', 'Caoba', 'Pino','wanacaste'];
+  tipos = ['cedro', 'Caoba', 'Pino','Guanacaste'];
   unidades = ['metro', 'pie', 'pulgada'];
   fechahoy=''
   imag: File | undefined;
@@ -32,6 +34,7 @@ export class IngresoMadera {
 
   async onSubmit() {
     try{
+      this.cargando=true
       const id=await this.realtime.bodega(this.Madera,'Madera');
       await this.realtime.bodega(
         {
@@ -46,8 +49,9 @@ export class IngresoMadera {
       this.alerta.alertaExito('se ingreso tu compra a bodega correctamente');
 
     }catch{
+      this.alerta.alertaerror('no se ingreso el producto')
       
-    }
+    }finally{this.cargando=false};
     
   }
 

@@ -20,27 +20,31 @@ import { Marketprincipal } from './componentes/marketprincipal/marketprincipal';
 import { Venderplantilla } from './componentes/venderplantilla/venderplantilla';
 import { Notfound } from './componentes/notfound/notfound';
 import { IngresoCuero } from './componentes/ingreso-cuero/ingreso-cuero';
+import { clienteRestriccionGuard } from './guard/cliente-restriccion-guard';
+import { NoAutorizado } from './componentes/no-autorizado/no-autorizado';
+import { loginRestriccionGuard } from './guard/login-restriccion-guard';
 
 export const routes: Routes = [
     {path:'ajustes', component:Ajustes},
     {path:'', component:Inicio},
-    {path:'calculadora', component:Calculadora},
-    {path:'asistente', component:Asistente},
-    {path:'login', component:Login},
+    {path:'calculadora', component:Calculadora,canActivate:[clienteRestriccionGuard]},
+    {path:'asistente', component:Asistente,canActivate:[clienteRestriccionGuard]},
+    {path:'login', component:Login,canActivate:[loginRestriccionGuard]},
     {path:'marketplace', component:Marketplace},
-    {path:'reportes', component:Reportes},
-    {path:'sectorpro', component:SectorProducto},
-    {path:'registro', component:Registro},
+    {path:'reportes', component:Reportes,canActivate:[clienteRestriccionGuard]},
+    {path:'sectorpro', component:SectorProducto,canActivate:[loginRestriccionGuard]},
+    {path:'registro', component:Registro,canActivate:[loginRestriccionGuard]},
     {path:'perfil', component:Perfil},
-    {path:'cuero', component:CueroComponent},
-    {path:'material', component:Material},
-    {path:'textil', component:Textil},
-    {path:'ingresarpro', component:IngresoProducto},
+    {path:'cuero', component:CueroComponent,canActivate:[clienteRestriccionGuard]},
+    {path:'material', component:Material,canActivate:[clienteRestriccionGuard]},
+    {path:'textil', component:Textil,canActivate:[clienteRestriccionGuard]},
+    {path:'ingresarpro', component:IngresoProducto,canActivate:[clienteRestriccionGuard]},
     {path:'visitarperfil/:id', component:Perfilvendedor},
-    {path:'gestionpro', component:GestionProductos},
-    {path:'ingresoMadera', component:IngresoMadera},
+    {path:'gestionpro', component:GestionProductos,canActivate:[clienteRestriccionGuard]},
+    {path:'ingresoMadera', component:IngresoMadera,canActivate:[clienteRestriccionGuard]},
     {path:'marketprincipal', component:Marketprincipal},
-    {path:'venderplantilla', component:Venderplantilla},
-    {path:'ingresoCuero', component:IngresoCuero},
+    {path:'venderplantilla', component:Venderplantilla,canActivate:[clienteRestriccionGuard]},
+    {path:'ingresoCuero', component:IngresoCuero,canActivate:[clienteRestriccionGuard]},
+    {path:'no-autorizado', component:NoAutorizado},
     {path:'**', component:Notfound}
 ];

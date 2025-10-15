@@ -6,14 +6,16 @@ import { Switalert2Service } from '../../services/switalert2.service';
 import { GlobalbaseService } from '../../services/storage.service';
 import { Realtime } from '../../services/realtime';
 import { Router } from '@angular/router';
+import { ComponenteCarga } from '../componente-carga/componente-carga';
 
 @Component({
   selector: 'app-ingreso-producto',
-  imports: [FormsModule,CommonModule],
+  imports: [FormsModule,CommonModule,ComponenteCarga],
   templateUrl: './ingreso-producto.html',
   styleUrl: './ingreso-producto.css'
 })
 export class IngresoProducto implements OnInit{
+  cargando=false;
   // constantes de la clase
   categorias = ['cuero', 'Alimentos', 'Textil', 'Madera','otros'];
   urlimgactual = ''
@@ -42,6 +44,7 @@ export class IngresoProducto implements OnInit{
       this.alerta.info('necesitas seleccionar un imagen para publicar el producto')
       return
     }
+    this.cargando=true;
     try{
     const uriImg= await this.global.subirImagen(this.imag);
     const pro:any={
@@ -59,6 +62,9 @@ export class IngresoProducto implements OnInit{
     this.ruta.navigate(['../perfil']);
     }catch{
       this.alerta.alertaerror('el porducto no se guardo correctamente');
+    }
+    finally{
+      this.cargando=false;
     }
     
   }

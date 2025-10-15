@@ -17,7 +17,6 @@ export class MenuNavegacion {
 
   islogin(){
     this.user=this.local.getItem('user')
-    console.log('user')
     if(this.user!== null){
       return true
     }else{

@@ -5,56 +5,145 @@ import { StorageService } from '../../services/localstorage.service';
 import { Realtime } from '../../services/realtime';
 import { GlobalbaseService } from '../../services/storage.service';
 import { Switalert2Service } from '../../services/switalert2.service';
+import { ComponenteCarga } from '../componente-carga/componente-carga';
 
 @Component({
   selector: 'app-gestion-productos',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, ComponenteCarga],
   templateUrl: './gestion-productos.html',
   styleUrl: './gestion-productos.css',
 })
 export class GestionProductos implements OnInit {
+  // para cuando una ventana esta cargado o se esta haciendo una silicitud
+  cargando = false;
+  // clave unica del administrador 
+  keyuser:any;
+  // cuando pulsamos a vender un producto guardamos ese producto aca
+  productoVentaActiva: any;
+  // este es el producto original
+  originalProductoVenta: any;
+  // donde se guarde el nombre del cliente en caso de realizar una venta 
+  nombreCliente=''
+  // fecha de realizacion de la venta 
+  fecha: string = '';
+  // dependiendo la vista es lo que se mostrara en el template
   vista = 'productoventa';
+  // mostrar el formulario para reslizar venta
+  ventaMostrar = false;
   filtro: string = '';
+  // donse se guardara el producto que verremos con la opcion ver
   productounico: any;
+  // controlador que si el administrador esta viendo un producto
+  vistapro: boolean = false;
+  // arreglo donde estaran almacenados todos mis productos qe publique o puse a le venta
   productos: any[] = [];
-  madera: any[] = [
-    {
-      id: '',
-      id_usuario: '',
-      tipo: '',
-      presentacion: '',
-      unidad_medida: '',
-      cantidad_u_m: 0,
-      precio_unidad_medida: 0,
-      proveedor: '',
-    },
-  ];
-   cuero: any[] = [];
+  // donde tengo la bodega de madera
+  madera: any[] = [];
+  // donde tengo la bodega de cuero
+  cuero: any[] = [];
+  // donde obtengo mis plantillas
   plantillas: any[] = [];
-  descargarArchivo(enlace:string) {
-  const link = document.createElement('a');
-  link.href = enlace;
-  link.download = 'plantilla.pdf'; // nombre sugerido
-  link.target = '_blank'; // abre en nueva pestaña
-  link.setAttribute('rel', 'noopener noreferrer');
-  link.click();
+  // mostrar una targeta o formulario para vender un producto
+  venserProVentana = false;
+
+  // descargar las plantillas para observar que he subido yo en mis plantillas
+  descargarArchivo(enlace: string) {
+    const link = document.createElement('a');
+    link.href = enlace;
+    link.download = 'plantilla.pdf'; // nombre sugerido
+    link.target = '_blank'; // abre en nueva pestaña
+    link.setAttribute('rel', 'noopener noreferrer');
+    link.click();
   }
 
-  vistapro: boolean = false;
-  ngOnInit(): void {
-    this.obtenerpro();
+  mostrarVenderProducto(id: any) {
+    this.ventaMostrar = true;
+    this.fecha='';
+    this.nombreCliente=''
+    const producto = this.productos.find((p) => p.id === id);
+    this.productoVentaActiva = { ...producto, cantidad: 1 };
+    this.originalProductoVenta = { ...producto };
   }
+
+  // funcion para realizar la venra del producto
+
+  async venderProdcuto() {
+    if (this.originalProductoVenta.cantidad < this.productoVentaActiva.cantidad) {
+      this.alerta.alertaerror('no tienes suficientes existencias para realizar esta venta');
+      return;
+    }
+    if(this.productoVentaActiva.precio_venta===null || this.productoVentaActiva.precio_venta<= 0){
+      this.alerta.alertaerror('ingrese un precio mayor a 0')
+      return
+    }
+    if (this.originalProductoVenta.costo > this.productoVentaActiva.precio_venta) {
+      const confirmar = confirm(
+        `El precio de venta (C$${this.productoVentaActiva.precio_venta}) es menor al costo (C$${this.originalProductoVenta.costo}).\n¿Deseas continuar de todos modos?`
+      );
+
+      if (!confirmar) {
+        this.alerta.alertaerror('Venta cancelada ');
+        return; 
+      }
+    }
+
+    if(this.nombreCliente===''){
+        this.alerta.alertaerror('ingresa el nombre del cliente al cual se le realizara la venta');
+        return;
+    }
+
+    if(this.fecha===''){
+        this.alerta.alertaerror('especifica la fecha de la venta');
+        return;
+    }
+    try{
+      this.cargando=true;
+      const venta={
+        id_producto:this.productoVentaActiva.id,
+        id_usuario:this.keyuser,
+        cantidad:this.productoVentaActiva.cantidad,
+        precio_venta:this.productoVentaActiva.precio_venta,
+        fecha:this.fecha,
+        gananacia:(this.productoVentaActiva.precio_venta*this.productoVentaActiva.cantidad)-(this.productoVentaActiva.cantidad* this.originalProductoVenta.costo),
+        precio_total:this.productoVentaActiva.precio_venta*this.productoVentaActiva.cantidad
+      }
+      const nueva_existencia=this.originalProductoVenta.cantidad-this.productoVentaActiva.cantidad;
+      await this.global.setventa(venta,nueva_existencia)
+      this.alerta.alertaExito('la venta fue resgistrada a:  '+this.nombreCliente );
+      await this.obtenerpro();
+      this.cargando=false;
+    }catch{
+
+    }
+   
+
+  }
+
+  // cerrar ventana de la venta que se esta realizando
+
+  cerrarVenta() {
+    this.ventaMostrar = false;
+  }
+
+  // cambiar la vista de los insumos que se estan viendo
   async cambiarvista(cadena: string) {
+    this.cargando = true;
     this.vista = cadena;
     if (cadena === 'madera') {
       this.madera = await this.global.getMiBod('Madera');
-    }else if(cadena==='plantillas'){
-      this.plantillas=await this.global.getMiplantilla()
-    }else if(cadena==='cuero'){
+      this.cargando = false;
+    } else if (cadena === 'plantillas') {
+      this.plantillas = await this.global.getMiplantilla();
+      this.cargando = false;
+    } else if (cadena === 'cuero') {
       this.cuero = await this.global.getMiBod('Cuero');
-      console.log(this.cuero)
+      this.cargando = false;
+    } else {
+      this.cargando = false;
     }
   }
+
+  // obtner los productos que el admin a publicado para vender
   async obtenerpro() {
     const cadena = this.local.getItem('key');
     const snapshot = await this.global.getMiPro(cadena, 'productos');
@@ -67,7 +156,7 @@ export class GestionProductos implements OnInit {
       });
     }
   }
-
+  // ver detalles de un solo producto que tiene el admin a la venta
   verProducto(producto: any) {
     this.productounico = {};
     this.productounico = this.productos.find((p) => p.id === producto.id);
@@ -76,17 +165,24 @@ export class GestionProductos implements OnInit {
   cerra() {
     this.vistapro = false;
   }
-  async eliminarProducto(e: any, url: any,nodo:string) {
+
+  // eliminar producto o plantilla publicada anterior mente
+  async eliminarProducto(e: any, url: any, nodo: string) {
     if (confirm(`¿Deseas eliminar el producto definitivamente?`)) {
       await this.storage.eliminarImg(url);
       await this.global.remove(e, nodo);
-      if(nodo==='plantillas'){
+      if (nodo === 'plantillas') {
         this.plantillas = this.plantillas?.filter((p) => p.id !== e) || [];
         this.global.setPlantilla(this.plantillas);
-      }else{
-         this.productos = this.productos?.filter((p) => p.id !== e) || [];
+      } else {
+        this.productos = this.productos?.filter((p) => p.id !== e) || [];
       }
     }
+  }
+  
+  ngOnInit(): void {
+    this.obtenerpro();
+    this.keyuser=this.local.getItem('key');
   }
 
   constructor(

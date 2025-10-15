@@ -10,7 +10,7 @@
         @for (c of categorias; track $index) {
         <option [value]="c">{{ c }}</option>
         }
-      </select>
+      </select> 
     </div>
   </header>
   <main>
@@ -72,3 +72,6 @@
     }
   </main>
 </div>
+@if(cargando){
+<app-componente-carga></app-componente-carga>
+}

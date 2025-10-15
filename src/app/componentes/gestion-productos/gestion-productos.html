@@ -58,6 +58,9 @@
             <button (click)="eliminarProducto(producto.id, producto.urlimg, 'productos')">
               Eliminar
             </button>
+            <button class="btn btn-primary" (click)="mostrarVenderProducto(producto.id)">
+              Vender
+            </button>
           </td>
         </tr>
         }
@@ -82,7 +85,7 @@
           <td>{{ maderau.presentacion }}</td>
           <td>{{ maderau.cantidad_u_m + ' ' + maderau.unidad_medida }}</td>
           <td>{{ maderau.precio_unidad_medida + 'C$ por cada ' + maderau.unidad_medida }}</td>
-          <td>{{ maderau.unidad }}</td>
+          <td>{{ maderau.proveedor }}</td>
           <td>
             <button>Aumentar</button>
             <button>Decrementar</button>
@@ -112,7 +115,7 @@
           <tr>
             <td>{{ c.tipo }}</td>
             <td>{{ c.calidad }}</td>
-            <td>{{ c.cantidad+' '+c.unidad_medida }}</td>
+            <td>{{ c.cantidad + ' ' + c.unidad_medida }}</td>
             <td>{{ c.precio_unidad }}</td>
             <td>{{ c.proveedor }}</td>
             <td>
@@ -168,6 +171,9 @@
     <!--_____________________ vista de platillas _____________________________________ -->
     }
   </div>
+
+  <!-- ventana modal para observar productos____________________ -->
+
   @if (vistapro==true) {
   <div class="verproducto">
     <div class="card">
@@ -210,3 +216,81 @@
 
   }
 </div>
+<!-- ventana modal para registrar la venta de un producto -->
+
+@if (ventaMostrar) {
+<div class="card-vender-overlay">
+  <div class="card-vender">
+    <h2><i class="fa-solid fa-box"></i> {{ originalProductoVenta.nombre }}</h2>
+    <div class="card-vender-info-group">
+      <i class="fa-solid fa-warehouse"></i>
+      <div>
+        <span class="card-vender-label">Existencia actual</span>
+        <span class="card-vender-value">{{ originalProductoVenta.cantidad }} unidades</span>
+      </div>
+    </div>
+
+    <div class="card-vender-info-group editable">
+      <i class="fa-solid fa-user"></i>
+      <div>
+        <span class="card-vender-label">Nombre del comprador</span>
+        <input
+          [(ngModel)]="nombreCliente"
+          type="text"
+          class="card-vender-input"
+          placeholder="Ingrese nombre del comprador..."
+        />
+      </div>
+    </div>
+
+    <div class="card-vender-info-group editable">
+      <!-- <i class="fa-solid fa-dollar-sign"></i> -->
+       <span class="moneda">C$</span>
+      <div>
+        <span class="card-vender-label">Precio de venta - costo{{productoVentaActiva.costo}} C$</span>
+        <input
+          [(ngModel)]="productoVentaActiva.precio_venta"
+          type="number"
+          class="card-vender-input"
+          placeholder="ingrese precio C$"
+        />
+      </div>
+    </div>
+
+    <div class="card-vender-info-group editable">
+      <i class="fa-solid fa-boxes-stacked"></i>
+      <div>
+        <span class="card-vender-label">Cantidad a comprar</span>
+        <input
+          [(ngModel)]="productoVentaActiva.cantidad"
+          type="number"
+          class="card-vender-input"
+          placeholder="Ingrese cantidad..."
+          min="1"
+        />
+      </div>
+    </div>
+
+    <div class="card-vender-info-group editable">
+      <i class="fa-solid fa-calendar-days"></i>
+      <div>
+        <span class="card-vender-label">Fecha de venta</span>
+        <input [(ngModel)]="fecha" type="date" class="card-vender-input" />
+      </div>
+    </div>
+
+    <button (click)="venderProdcuto()" class="card-vender-save-btn">
+      <i class="fa-solid fa-floppy-disk"></i> Realizar La Venta
+    </button>
+
+    <div class="card-vender-close" (click)="cerrarVenta()">
+      <i class="fa-solid fa-xmark"></i>
+    </div>
+  </div>
+</div>
+}
+<!--fin de  ventana modal para registrar la venta de un producto -->
+
+@if(cargando){
+<app-componente-carga></app-componente-carga>
+}

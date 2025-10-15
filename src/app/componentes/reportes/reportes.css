@@ -64,3 +64,6 @@ th {
     background-color: var(--color-primary-light);
     color: black;
 }
+.cuero tr th{
+  background-color: var(--color-accent-dark);
+}

@@ -3,6 +3,7 @@ import { Usuario } from '../objetos';
 import { Switalert2Service } from '../services/switalert2.service';
 import { StorageService } from '../services/localstorage.service';
 import {
+  update,
   remove,
   Database,
   ref,
@@ -37,6 +38,8 @@ export class Realtime {
     const newRef = push(productosRef);
     return set(newRef, pro);
   }
+
+
   async bodega(pro: any, nodo: string) {
     try {
       const productosRef = ref(this.db, nodo);
@@ -110,6 +113,27 @@ export class Realtime {
     const consulta = query(referencia, orderByChild('idUsuario'), equalTo(idavisitar));
     return get(consulta);
   }
+
+  // registrar un venta de un producto publicado_______________________________
+
+  async setventa(venta:any,cantidad_nueva:any){
+    try {
+      const referencia=ref(this.db,`productos/${venta.id_producto}`)
+      await update(referencia,{cantidad:cantidad_nueva})
+      
+      const productosRef = ref(this.db,'Ventas');
+      const newRef = push(productosRef);
+      await set(newRef, venta);
+      return newRef.key;
+    } catch (error) {
+      this.alerta.alertaerror('a ocurrido un error al registrar la venta')
+      console.error('Error al guardar producto:', error);
+      return '';
+    }finally{
+    }
+  }
+
+
   // obtener mis productos de realtima de ser necesario__________________
   Misproductos: Array<any> = [];
   async getMiProducto() {
@@ -310,6 +334,6 @@ export class Realtime {
     private db: Database,
     private alerta: Switalert2Service,
     private local: StorageService,
-    private auth: Auth
+    private auth: Auth,
   ) {}
 }
