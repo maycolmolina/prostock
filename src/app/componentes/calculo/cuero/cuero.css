@@ -9,19 +9,21 @@
   --transition: all 0.3s ease;
 }
 
+
+
 .container {
   max-width: 1000px;
   margin: 20px auto;
-  background: rgb(255, 255, 255);
+  background:var(--color-white);
   border-radius: 10px;
   box-shadow: var(--shadow);
   overflow: hidden;
   padding: 20px;
-}
+} 
 
 .calculator-header {
-  background:#8B4513;
-  color: rgb(255, 255, 255);
+  background: var(--color-accent-dark);
+  color:var(--color-white);
   padding: 20px;
   text-align: center;
 }
@@ -29,7 +31,7 @@
 .tabs {
   display: flex;
   margin-bottom: 20px;
-  border-bottom: 1px solid #D2B48C;
+  border-bottom: 1px solid #D2B48C ;
 }
 
 .tab {
@@ -38,12 +40,12 @@
   background: #DEB887;
   border-radius: 5px 5px 0 0;
   margin-right: 5px;
-  color: white;
+  color: var(--color-white);
   font-weight: 500;
 }
 
 .tab.active {
-  background: var(--primary);
+  background:var(--accent);
 }
 
 .calculator-content {
@@ -58,7 +60,7 @@
 }
 
 .result-section {
-  background: var(--light);
+  background: var(--color-white);
   border-radius: 8px;
 }
 
@@ -70,17 +72,17 @@
   display: block;
   margin-bottom: 8px;
   font-weight: 500;
-  color: var(--dark);
+  color:  var(--accent);
 }
 
 .form-group select, 
 .form-group input {
   width: 100%;
   padding: 12px;
-  border: 1px solid #ddd;
+  border: 1px solid  var(--color-neutral);
   border-radius: 4px;
   font-size: 16px;
-  background: #FFF8DC;
+  background: var(--color-white);
 }
 
 .btn {
@@ -96,8 +98,8 @@
 }
 
 .btn-primary {
-  background: var(--primary);
-  color: white;
+  background: var(--accent);
+  color:  var(--color-white); 
 }
 
 .btn-primary:hover {
@@ -117,7 +119,7 @@
 }
 
 .result-details {
-  background: white;
+  background: var(--color-white);
   padding: 15px;
   border-radius: 8px;
   margin-top: 20px;
@@ -136,7 +138,7 @@
   padding: 15px;
   background: #F0E68C;
   border-radius: 8px;
-  border-left: 4px solid var(--accent);
+  border-left: 4px solid var(--color-accent-dark);
 }
 
 .waste-note {
@@ -145,5 +147,5 @@
   background: #FFEBCD;
   border-radius: 5px;
   font-size: 0.9rem;
-  border-left: 3px solid var(--warning);
+  border-left: 3px solid var(--color-accent);
 }

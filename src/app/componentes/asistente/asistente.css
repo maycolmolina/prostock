@@ -1,5 +1,6 @@
+
 .top-header {
-  background: white;
+  background:var(--color-bg-light);
   padding: 18px 30px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   display: flex;
@@ -23,11 +24,11 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #4a90e2 0%, #50e3c2 100%);
+  background: linear-gradient(135deg,var(--color-primary) 0%, var(--color-primary-dark) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: var(--color-bg-light);
   font-weight: bold;
 }
 
@@ -50,7 +51,7 @@ main {
 }
 .hh {
   font-size: 35px;
-  color: #ffffff;
+  color: var(--color-bg-light);
   background-color: var(--color-secondary);
   padding: 10px;
   width: 60px;
@@ -71,7 +72,7 @@ main {
   margin: 10px;
 }
 .cajachat {
-  background-color: #ffffff;
+  background-color: var(--color-bg-light);
   width: 56%;
   border-radius: 11px;
   border: 2px solid var(--color-neutral);
@@ -95,7 +96,6 @@ main {
 .message-box {
   padding: 8px;
   border-radius: 5px;
-
   background: rgb(211, 213, 214);
   margin-bottom: 13px;
   max-width: 60%;
@@ -106,8 +106,8 @@ main {
 .endsms {
   margin-left: auto;
   min-width: 60%;
-  background: linear-gradient(to right, #2a60d3, #081979);
-  color: rgb(255, 255, 255);
+  background: linear-gradient(to right, var(--color-primary) , var(--color-primary-dark));
+  color: var(--color-white);
 }
 .input-container {
   display: flex;
@@ -132,9 +132,9 @@ button {
 
 /* sigestiones apartado */
 .suggestions-panel {
-  background: white;
+  background: var(--color-white);
   border-radius: 8px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px -1px var(--color-neutral-dark);
   padding: 25px;
   height: fit-content;
   position: sticky;
@@ -165,7 +165,7 @@ button {
 }
 
 .suggestion-card {
-  background: #f1f5f9;
+  background:var(--color-neutral);
   border-radius: 8px;
   padding: 15px;
   cursor: pointer;
@@ -174,16 +174,16 @@ button {
 }
 
 .suggestion-card:hover {
-  background: #e2e8f0;
+  background: var(--color-neutral);
   transform: translateX(5px);
 }
 
 .suggestion-card.optimization {
-  border-left-color: #10b981;
+  border-left-color:var(--color-secondary);
 }
 
 .suggestion-card.waste {
-  border-left-color: #f59e0b;
+  border-left-color:  var(--color-accent);
 }
 
 .suggestion-card.cost {
@@ -191,7 +191,7 @@ button {
 }
 
 .suggestion-card.supplier {
-  border-left-color: #2563eb;
+  border-left-color:var(--color-primary);
 }
 
 .suggestion-icon {
@@ -201,22 +201,22 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: var(--color-white);
   margin-bottom: 10px;
   font-size: 18px;
 }
 
 .optimization .suggestion-icon {
-  background: #10b981;
+  background:var(--color-secondary);
 }
 .waste .suggestion-icon {
-  background: #f59e0b;
+  background:  var(--color-accent);
 }
 .cost .suggestion-icon {
   background: #ef4444;
 }
 .supplier .suggestion-icon {
-  background: #2563eb;
+  background: var(--color-primary);
 }
 
 .suggestion-title {
@@ -238,7 +238,7 @@ button {
 
 .action-btn {
   padding: 8px 15px;
-  background: #f1f5f9; /* var(--gray-lighter) */
+  background: var(--color-neutral); /* var(--gray-lighter) */
   border: none;
   border-radius: 20px;
   cursor: pointer;
@@ -250,7 +250,7 @@ button {
 }
 
 .action-btn:hover {
-  background: #e2e8f0; /* var(--gray-light) */
+  background: var(--color-neutral); /* var(--gray-light) */
 }
 
 /* medias para la responsividad ______________ */

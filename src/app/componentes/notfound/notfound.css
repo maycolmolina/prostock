@@ -5,38 +5,40 @@
   justify-content: center;
   height: 100vh;
   text-align: center;
-  background-color: #f4f4f4;
-  color: #333;
+  background-color: var(--color-bg-light);
+  color: var(--color-neutral-dark);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .icon {
   font-size: 80px;
-  color: #ff9900;
+  color: var(--color-accent);
   margin-bottom: 20px;
 }
 
 h1 {
   font-size: 80px;
   margin: 0;
-  color: #ff9900;
+  color: var(--color-accent);
 }
 
 h2 {
   font-size: 28px;
   margin: 10px 0;
+  color: var(--color-neutral-dark);
 }
 
 p {
   font-size: 16px;
-  color: #666;
+  color: var(--color-neutral);
   margin-bottom: 30px;
 }
 
 .btn-volver {
   display: inline-flex;
   align-items: center;
-  background-color: #ff9900;
-  color: white;
+  background-color: var(--color-accent);
+  color: var(--color-white);
   padding: 12px 20px;
   border-radius: 8px;
   text-decoration: none;
@@ -49,5 +51,5 @@ p {
 }
 
 .btn-volver:hover {
-  background-color: #e68a00;
+  background-color: var(--color-accent-dark);
 }

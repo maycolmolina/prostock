@@ -3,10 +3,12 @@
   font-family: Inter, Arial, sans-serif;
 }
 
+/* ===== CONTENEDOR PRINCIPAL ===== */
 .mp-wrap {
   max-width: 1100px;
   margin: 24px auto;
   padding: 18px;
+  background: var(--color-bg-light);
 }
 
 /* ===== ENCABEZADO ===== */
@@ -16,11 +18,11 @@
   align-items: center;
   gap: 12px;
   margin-bottom: 18px;
-  flex-wrap: wrap; /* permite que el contenido se acomode en pantallas pequeñas */
+  flex-wrap: wrap;
 }
 
 .mp-header h1 {
-  color: #0f172a;
+  color: var(--color-neutral-dark);
   margin: 0;
   flex: 1;
 }
@@ -40,6 +42,8 @@
   border-radius: 8px;
   border: 1px solid rgba(15, 23, 42, 0.08);
   min-width: 220px;
+  background: var(--color-white);
+  color: var(--color-neutral-dark);
 }
 
 /* ===== GRID ===== */
@@ -49,9 +53,10 @@
   gap: 18px;
 }
 
+/* ===== TARJETA ===== */
 .card {
-  background: linear-gradient(180deg, #0f172a, #0b3a8a);
-  color: white;
+  background: linear-gradient(180deg, var(--color-primary-dark), var(--color-primary));
+  color: var(--color-white);
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 8px 24px rgba(2, 6, 23, 0.4);
@@ -80,12 +85,13 @@
   position: absolute;
   right: 10px;
   top: 10px;
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.15);
   padding: 6px 8px;
   border-radius: 8px;
   font-weight: 600;
 }
 
+/* ===== CONTENIDO DE TARJETA ===== */
 .card-body {
   padding: 12px;
 }
@@ -109,7 +115,7 @@
 
 .price {
   font-weight: 700;
-  color: #a7f3d0;
+  color: var(--color-white);
 }
 
 .cost {
@@ -118,6 +124,7 @@
   text-decoration: line-through;
 }
 
+/* ===== BOTONES ===== */
 .actions {
   display: flex;
   gap: 8px;
@@ -129,26 +136,34 @@
   border-radius: 8px;
   border: none;
   cursor: pointer;
+  font-weight: 700;
 }
 
 .actions button.primary {
-  background: #06b6d4;
-  color: #042c40;
-  font-weight: 700;
+  background: var(--color-accent);
+  color: var(--color-white);
 }
 
-button.what {
-  background: #1dc462;
-  color: #ffffff;
-  font-weight: 700;
+.actions button.primary:hover {
+  background: var(--color-accent-dark);
 }
 
+button .what {
+  background: var(--color-secondary);
+  color: var(--color-white);
+}
+
+button .what:hover {
+  background: var(--color-secondary-dark);
+}
+
+/* ===== ESTADO VACÍO ===== */
 .empty {
-  grid-column: 1/-1;
+  grid-column: 1 / -1;
   text-align: center;
-  color: #072a4c;
+  color: var(--color-primary-dark);
   padding: 40px;
-  background: #e6f6ff;
+  background: var(--color-primary-light);
   border-radius: 10px;
 }
 
@@ -165,8 +180,8 @@ button.what {
 }
 
 .modal-card {
-  background: white;
-  color: #041124;
+  background: var(--color-white);
+  color: var(--color-neutral-dark);
   border-radius: 12px;
   max-width: 900px;
   width: 100%;
@@ -182,6 +197,7 @@ button.what {
   border: none;
   font-size: 20px;
   cursor: pointer;
+  color: var(--color-neutral-dark);
 }
 
 .modal-grid {
@@ -214,11 +230,16 @@ button.what {
   border-radius: 8px;
   border: none;
   cursor: pointer;
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-weight: 600;
+}
+
+.modal-actions button:hover {
+  background: var(--color-primary-dark);
 }
 
 /* ===== MEDIA QUERIES ===== */
-
-/* Tablets */
 @media (max-width: 900px) {
   .modal-grid {
     grid-template-columns: 1fr;
@@ -228,7 +249,6 @@ button.what {
   }
 }
 
-/* Móviles */
 @media (max-width: 600px) {
   .mp-wrap {
     padding: 12px;
@@ -261,10 +281,7 @@ button.what {
     height: 200px;
   }
 
-  .modal-actions {
-    flex-direction: column;
-  }
-
+  .modal-actions,
   .actions {
     flex-direction: column;
   }

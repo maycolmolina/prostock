@@ -136,6 +136,7 @@ export class Realtime {
       const productosRef = ref(this.db, 'Ventas');
       const newRef = push(productosRef);
       await set(newRef, venta);
+      this.Ventas=[];
       return newRef.key;
     } catch (error) {
       this.alerta.alertaerror('a ocurrido un error al registrar la venta');

@@ -1,55 +1,65 @@
-.btnu{
-    display: flex;
-    flex-direction: row;
-    background-color: rgb(20, 155, 94);
-    width: 165px;
-    height: 60px;
-    align-items: center;
-    border-radius: 14px;
-    font-size: 1.3rem;
-    color: black;
-    padding: 5px 10px;
-    margin: 0px 10px;
-    cursor: pointer;
+
+.btnu {
+  display: flex;
+  flex-direction: row;
+  background-color: var(--color-secondary);
+  width: 165px;
+  height: 60px;
+  align-items: center;
+  border-radius: 14px;
+  font-size: 1.3rem;
+  color: var(--color-dark--);
+  padding: 5px 10px;
+  margin: 0px 10px;
+  cursor: pointer;
 }
-.dd{
-    z-index: 2;
+
+.dd {
+  z-index: 2;
 }
-.im{
-    background: url('/fondo.jpeg');
-    margin: 0;
-    padding: 0;
-    position: relative;
-    border: solid 1px white;
+
+.im {
+  background: url('/fondo.jpeg');
+  margin: 0;
+  padding: 0;
+  position: relative;
+  border: solid 1px var(--color-white);
 }
+
 .im::before {
   content: '';
   position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background-color: rgba(255, 255, 255, 0.5); /* overlay blanco semi-transparente */
   z-index: -0;
 }
-.flexrow{
-    display: flex;
-    flex-direction: row;
-}
-.ico{
-  width: 50px;
-    height: 50px;
-    margin: 0px 10px;  
-}
-.naranja{
-    background-color: rgb(225, 87, 6);
-}
-.vector{
-    width: 50px;
-    height: 50px;
-}
-.fila{
-    display: flex;
+
+.flexrow {
+  display: flex;
+  flex-direction: row;
 }
 
+.ico {
+  width: 50px;
+  height: 50px;
+  margin: 0px 10px;
+}
+
+.naranja {
+  background-color: var(--color-accent);
+}
+
+.vector {
+  width: 50px;
+  height: 50px;
+}
+
+.fila {
+  display: flex;
+}
 
 /* Sección general */
 section {
@@ -60,10 +70,11 @@ section {
 h2 {
   font-size: 2rem;
   margin-bottom: 10px;
+  color: var(--color-neutral-dark);
 }
 
 p {
-  color: #555;
+  color: var(--color-neutral-dark);
 }
 
 /* ===== Cards de herramientas ===== */
@@ -75,7 +86,7 @@ p {
 }
 
 .card {
-  background: #fff;
+  background: var(--color-white);
   border-radius: 12px;
   padding: 25px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -95,17 +106,21 @@ p {
   margin-bottom: 10px;
 }
 
+/* Colores de iconos con variables */
 .purple {
-  color: #6a4dfc;
+  color: var(--color-primary-dark);
 }
+
 .green {
-  color: #16a34a;
+  color: var(--color-secondary);
 }
+
 .orange {
-  color: #f97316;
+  color: var(--color-accent);
 }
+
 .blue {
-  color: #2563eb;
+  color: var(--color-primary);
 }
 
 /* ===== Pasos ===== */
@@ -117,7 +132,7 @@ p {
 }
 
 .step {
-  background: #fff;
+  background: var(--color-white);
   border-radius: 12px;
   padding: 20px;
   text-align: center;
@@ -126,8 +141,8 @@ p {
 
 .circle {
   display: inline-block;
-  background: #2563eb;
-  color: #fff;
+  background: var(--color-primary);
+  color: var(--color-white);
   font-weight: bold;
   width: 40px;
   height: 40px;
@@ -145,7 +160,7 @@ p {
 }
 
 .testimonial {
-  background: #fff;
+  background: var(--color-white);
   border-radius: 12px;
   padding: 25px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -156,9 +171,10 @@ p {
 .testimonial h4 {
   margin-top: 15px;
   font-weight: bold;
+  color: var(--color-neutral-dark);
 }
 
 .testimonial span {
   font-size: 0.9rem;
-  color: #666;
+  color: var(--color-neutral);
 }

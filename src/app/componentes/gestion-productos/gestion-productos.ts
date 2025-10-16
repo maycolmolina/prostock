@@ -116,8 +116,7 @@ export class GestionProductos implements OnInit {
           this.productoVentaActiva.cantidad * this.originalProductoVenta.costo,
         precio_total: this.productoVentaActiva.precio_venta * this.productoVentaActiva.cantidad,
       };
-      const nueva_existencia =
-        this.originalProductoVenta.cantidad - this.productoVentaActiva.cantidad;
+      const nueva_existencia =this.originalProductoVenta.cantidad - this.productoVentaActiva.cantidad;
       await this.global.setventa(venta, nueva_existencia);
       this.alerta.alertaExito('la venta fue resgistrada a:  ' + this.nombreCliente);
       await this.obtenerpro();
@@ -181,11 +180,11 @@ export class GestionProductos implements OnInit {
       // ANTES DE ELIMINAR CONFIRMAMOS SI NO TENEMOS VENTAS ASOCIADAS
       if (nodo === 'productos') {
         const verificar = await this.global.verificarVentaDeProducto(e);
-        if (verificar===true) {
+        if (verificar === true) {
           this.alerta.info('no puedes eliminar este producto ya que tienes ventas asociadas a el ');
           return;
-        } else if (verificar==='Error') {
-          return
+        } else if (verificar === 'Error') {
+          return;
         }
       }
       await this.storage.eliminarImg(url);

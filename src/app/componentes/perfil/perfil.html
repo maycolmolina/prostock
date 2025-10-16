@@ -1,5 +1,5 @@
 <div class="container">
-  <!-- Perfil --> 
+  <!-- Perfil -->
   <div class="perfil">
     <img
       src="https://tse3.mm.bing.net/th/id/OIP.Dcmvj77Aeroc6HDfO26jlQHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
@@ -20,11 +20,14 @@
     @for (acceso of accesos; track $index) {
     <div class="card">
       <h2>{{ acceso.titulo }}</h2>
+
       @if (acceso.titulo==='Bodega') {
       <a (click)="abrirModal()">{{ acceso.texbtn }}</a>
+      }@else { @if (acceso.titulo==='Compartir enlace de mi perfil') {
+      <a (click)="copiarLink()">{{ acceso.texbtn }}</a>
       }@else {
       <a [routerLink]="acceso.link">{{ acceso.texbtn }}</a>
-      }
+      } }
     </div>
     }
   </div>
@@ -40,9 +43,13 @@
     <h2><i class="fas fa-box-open"></i> Selecciona tipo de bodega</h2>
 
     <div class="opciones">
-    <button [routerLink]="'/ingresoMadera'"  class="btn-opcion madera"><i class="fas fa-tree"></i> Madera</button>
+      <button [routerLink]="'/ingresoMadera'" class="btn-opcion madera">
+        <i class="fas fa-tree"></i> Madera
+      </button>
 
-      <button routerLink="/ingresoCuero" class="btn-opcion cuero"><i class="fas fa-tshirt"></i>Cuero</button>
+      <button routerLink="/ingresoCuero" class="btn-opcion cuero">
+        <i class="fas fa-tshirt"></i>Cuero
+      </button>
     </div>
   </div>
 </div>
