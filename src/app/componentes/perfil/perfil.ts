@@ -12,7 +12,7 @@ export class Perfil implements OnInit{
 
   mostrarModal=false;
 
-  usuario = {
+  usuario = { 
     nombre: '',
     tipo: '',
     numero: '',
@@ -21,7 +21,7 @@ export class Perfil implements OnInit{
    accesos = [
     { titulo: 'Ingresar Productos', link: '../ingresarpro'  ,texbtn:'publicar'  },
     { titulo: 'Mi Inventario', link: '../gestionpro'  ,texbtn:'ver Insumos'  },
-    { titulo: 'facturacion', link: '/facturacion'  ,texbtn:'reportes'  },
+    { titulo: 'Facturacion', link: '/facturacion'  ,texbtn:'reportes'  },
     { titulo: 'Bodega', link: '/ingresoMadera'   ,texbtn:'ingresar a bodega'  }
   ];
   abrirModal(){

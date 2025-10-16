@@ -1,16 +1,16 @@
 <div class="container">
-  <!-- Perfil -->
+  <!-- Perfil --> 
   <div class="perfil">
     <img
       src="https://tse3.mm.bing.net/th/id/OIP.Dcmvj77Aeroc6HDfO26jlQHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
       alt="Foto de perfil"
     />
-    <div>
+    <div class="datos">
       <h1>{{ usuario.nombre }}</h1>
       <p>{{ usuario.tipo }}</p>
       <div class="contacto">
-        <span>📞 {{ usuario.numero }}</span>
-        <span>✉️ {{ usuario.correo }}</span>
+        <span><i class="fas fa-phone"></i> {{ usuario.numero }}</span>
+        <span><i class="fas fa-envelope"></i> {{ usuario.correo }}</span>
       </div>
     </div>
   </div>

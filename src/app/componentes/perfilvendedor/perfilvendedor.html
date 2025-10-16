@@ -116,18 +116,14 @@
       <a
         href="mailto:{{
           usuarioActual.correo
-        }}?subject=compra&body=estoy interesado en comprar tu {{ pu.nombre }}%0A%0Adescripcion: {{
-          pu.descripcion
-        }}%0A%0Aprecio:{{ pu.precio }}%0Ahttps://proyecto-chat-e71cc.web.app/mostpro/{{ pu.idpro }}"
+        }}?subject=compra&body=estoy interesado en comprar tu {{ pu.nombre }}%0A%0Aprecio:{{ pu.precio_venta }}%0A%0Acon url:%0A%0A {{ pu.urlimg }}"
         ><button class="btn bn">comprar</button></a
       >
       @if (usuarioActual.numero!='' && usuarioActual.numero) {
       <a
         href="whatsapp://send?phone={{
           usuarioActual.numero
-        }}&text=hola%20estoy interesado en tu producto.%0Ahttps://proyecto-chat-e71cc.web.app/mostpro/{{
-          pu.idpro
-        }}%0Adeseo%20que%20te%20comuniques%20con%20migo"
+        }}&text=hola%20estoy interesado en tu producto.%0A{{pu.urlimg}}%0Adeseo%20que%20te%20comuniques%20con%20migo"
         target="_blank"
       >
         <button class="btn bn2">

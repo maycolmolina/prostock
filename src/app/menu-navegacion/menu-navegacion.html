@@ -1,42 +1,51 @@
-<section class="encabezado">
+<section class="encabezado"  [ngClass]="{'ocultar': !menuAbierto}">
   <img class="perfil" src="/log.png" alt="perfil" />
   <h2>ProStock</h2>
-  <nav>
-    <ul>
-      <li routerLink="/perfil" routerLinkActive="activo">inicio</li>
 
-      @if (islogin()) { @if(user.tipo=='cliente'){
-      <li routerLink="marketprincipal" routerLinkActive="activo">marketplace</li>
-      <li routerLink="ajustes" routerLinkActive="activo">ajustes</li>
-      }@else{
-      <li routerLink="asistente" routerLinkActive="activo">asistente virtual</li>
-      <li routerLink="calculadora" routerLinkActive="activo">funcionalidades</li>
-      <li routerLink="marketprincipal" routerLinkActive="activo">marketplace</li>
-      <li routerLink="reportes" routerLinkActive="activo">reportes</li>
-      <li routerLink="ajustes" routerLinkActive="activo">ajustes</li>
-      } }@else {
-      <li routerLink="sectorpro" routerLinkActive="activo">sectores y productos</li>
-      <li class="botonlogin" routerLink="login">
-        <div class="vector">
-          <svg
-            fill="#ffffff"
-            viewBox="0 0 512 512"
-            xmlns="http://www.w3.org/2000/svg"
-            stroke="#ffffff"
-          >
-            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-            <g id="SVGRepo_iconCarrier">
-              <title>ionicons-v5-o</title>
-              <path
-                d="M392,80H232a56.06,56.06,0,0,0-56,56V240H329.37l-52.68-52.69a16,16,0,0,1,22.62-22.62l80,80a16,16,0,0,1,0,22.62l-80,80a16,16,0,0,1-22.62-22.62L329.37,272H176V376c0,32.05,33.79,56,64,56H392a56.06,56.06,0,0,0,56-56V136A56.06,56.06,0,0,0,392,80Z"
-              ></path>
-              <path d="M80,240a16,16,0,0,0,0,32h96V240Z"></path>
-            </g>
-          </svg>
-        </div>
-        <span> iniciar session </span>
+  <!-- Botón hamburguesa -->
+  <div class="menu-toggle" (click)="toggleMenu()">
+    <i class="fa-solid" [ngClass]="menuAbierto ? 'fa-xmark' : 'fa-bars'"></i>
+  </div>
+
+  <nav [class.open]="menuAbierto"    >
+    <ul>
+      <li  (click)="toggleMenu()" routerLink="/perfil" routerLinkActive="activo">
+        <i class="fa-solid fa-house"></i> Inicio
       </li>
+
+      @if (islogin()) {
+        @if (user.tipo == 'cliente') {
+          <li (click)="toggleMenu()" routerLink="marketprincipal" routerLinkActive="activo">
+            <i class="fa-solid fa-store"></i> Marketplace
+          </li>
+          <li (click)="toggleMenu()" routerLink="ajustes" routerLinkActive="activo">
+            <i class="fa-solid fa-gear"></i> Ajustes
+          </li>
+        } @else {
+          <li (click)="toggleMenu()" routerLink="asistente" routerLinkActive="activo">
+            <i class="fa-solid fa-robot"></i> Asistente Virtual
+          </li>
+          <li  (click)="toggleMenu()"routerLink="calculadora" routerLinkActive="activo">
+            <i class="fa-solid fa-calculator"></i> Funcionalidades
+          </li>
+          <li (click)="toggleMenu()" routerLink="marketprincipal" routerLinkActive="activo">
+            <i class="fa-solid fa-store"></i> Marketplace
+          </li>
+          <li (click)="toggleMenu()" routerLink="reportes" routerLinkActive="activo">
+            <i class="fa-solid fa-chart-line"></i> Reportes
+          </li>
+          <li (click)="toggleMenu()" routerLink="ajustes" routerLinkActive="activo">
+            <i class="fa-solid fa-gear"></i> Ajustes
+          </li>
+        }
+      } @else {
+        <li (click)="toggleMenu()" routerLink="sectorpro" routerLinkActive="activo">
+          <i class="fa-solid fa-layer-group"></i> Sectores Y Productos
+        </li>
+        <li (click)="toggleMenu()" class="botonlogin" routerLink="login">
+          <i class="fa-solid fa-right-to-bracket"></i>
+          <span> Iniciar Sesión </span>
+        </li>
       }
     </ul>
   </nav>

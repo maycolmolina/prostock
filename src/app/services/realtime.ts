@@ -39,7 +39,6 @@ export class Realtime {
     return set(newRef, pro);
   }
 
-
   async bodega(pro: any, nodo: string) {
     try {
       const productosRef = ref(this.db, nodo);
@@ -114,25 +113,37 @@ export class Realtime {
     return get(consulta);
   }
 
+  async verificarVentaDeProducto(id_pro: any): Promise<boolean | 'Error'> {
+    try {
+      const referencia = ref(this.db, 'Ventas');
+      const consulta = query(referencia, orderByChild('id_producto'), equalTo(id_pro));
+      const res = await get(consulta);
+      return res.exists();
+    } catch (error) {
+      console.error('Error al verificar venta de producto:', error);
+      this.alerta.alertaerror('Algo salió mal');
+      return 'Error';
+    }
+  }
+
   // registrar un venta de un producto publicado_______________________________
 
-  async setventa(venta:any,cantidad_nueva:any){
+  async setventa(venta: any, cantidad_nueva: any) {
     try {
-      const referencia=ref(this.db,`productos/${venta.id_producto}`)
-      await update(referencia,{cantidad:cantidad_nueva})
-      
-      const productosRef = ref(this.db,'Ventas');
+      const referencia = ref(this.db, `productos/${venta.id_producto}`);
+      await update(referencia, { cantidad: cantidad_nueva });
+
+      const productosRef = ref(this.db, 'Ventas');
       const newRef = push(productosRef);
       await set(newRef, venta);
       return newRef.key;
     } catch (error) {
-      this.alerta.alertaerror('a ocurrido un error al registrar la venta')
+      this.alerta.alertaerror('a ocurrido un error al registrar la venta');
       console.error('Error al guardar producto:', error);
       return '';
-    }finally{
+    } finally {
     }
   }
-
 
   // obtener mis productos de realtima de ser necesario__________________
   Misproductos: Array<any> = [];
@@ -262,8 +273,58 @@ export class Realtime {
           }
         }
       }
+    } catch (e) {
+      console.log(e);
+      this.alerta.alertaerror('a ocurrido un error');
     } finally {
       return this.compras;
+    }
+  }
+
+  // incio de obtener mis ventasd_________________________
+
+  Ventas: Array<any> = [];
+  async obtenerventasPro() {
+    if (this.Ventas.length != 0) {
+      return this.Ventas;
+    }
+    try {
+      // obtengo mi id
+      const mikey = this.local.getItem('key');
+      const referencia = ref(this.db, 'Ventas');
+      const consulta = query(referencia, orderByChild('id_usuario'), equalTo(mikey));
+      const snap = await get(consulta);
+      if (snap.exists()) {
+        const ventasArray: any = [];
+        snap.forEach((shildsnap) => {
+          ventasArray.push(shildsnap.val());
+        });
+        for (const venta of ventasArray) {
+          const prodcutoRef = ref(this.db, `productos/${venta.id_producto}`);
+          const producto = await get(prodcutoRef);
+
+          if (producto.exists()) {
+            const pro = producto.val();
+            const ventaPro = {
+              nombre: pro.nombre,
+              costo: pro.costo,
+              proveedor: pro.proveedor,
+              cantidad: venta.cantidad,
+              fecha: venta.fecha,
+              ganancia: venta.ganancia,
+              precio_total: venta.precio_total,
+              precio_unidad: venta.precio_venta,
+            };
+            this.Ventas.push(ventaPro);
+          } else {
+            this.alerta.alertaerror('No has realizado ninguna venta');
+          }
+        }
+      }
+    } catch (e) {
+      this.alerta.alertaerror('a ocurrido un error');
+    } finally {
+      return this.Ventas;
     }
   }
 
@@ -334,6 +395,6 @@ export class Realtime {
     private db: Database,
     private alerta: Switalert2Service,
     private local: StorageService,
-    private auth: Auth,
+    private auth: Auth
   ) {}
 }

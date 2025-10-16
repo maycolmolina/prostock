@@ -47,7 +47,10 @@ export class IngresoProducto implements OnInit{
     this.cargando=true;
     try{
     const uriImg= await this.global.subirImagen(this.imag);
+    const hoy = new Date().toISOString().split('T')[0];
     const pro:any={
+      cantidadInicial:this.producto.cantidad,
+      fecha:hoy,
       nombre: this.producto.nombre,
       categoria: this.producto.categoria,
       proveedor: this.producto.proveedor,
@@ -60,8 +63,9 @@ export class IngresoProducto implements OnInit{
     await this.realtime.mandarPro(pro);
     this.alerta.alertaExito('el producto se guardo correctamente')
     this.ruta.navigate(['../perfil']);
-    }catch{
-      this.alerta.alertaerror('el porducto no se guardo correctamente');
+    }catch(e){
+      console.log(e)
+      this.alerta.alertaerror('El porducto no se guardo correctamente');
     }
     finally{
       this.cargando=false;

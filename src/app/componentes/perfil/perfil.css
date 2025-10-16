@@ -15,14 +15,14 @@
   background: #fff;
   padding: 20px;
   border-radius: 16px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 .perfil img {
   width: 100px;
   height: 100px;
   border-radius: 50%;
   object-fit: cover;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 .perfil h1 {
   margin: 0;
@@ -52,12 +52,12 @@
   padding: 20px;
   border-radius: 16px;
   text-align: center;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s, box-shadow 0.2s;
 }
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 .card h2 {
   font-size: 18px;
@@ -222,6 +222,10 @@
 
 /* Responsivo */
 @media (max-width: 480px) {
+  .perfil {
+    display: flex;
+    flex-direction: column;
+  }
   .modal-content {
     width: 95%;
     padding: 1.5rem;
@@ -235,4 +239,3 @@
     width: 100%;
   }
 }
-

@@ -67,3 +67,69 @@ th {
 .cuero tr th{
   background-color: var(--color-accent-dark);
 }
+
+
+/* ------------------- Media Queries para Reportes ------------------- */
+
+/* Móviles (max-width: 600px) */
+@media (max-width: 600px) {
+  .fila {
+    flex-direction: column;
+  }
+
+  .MENU-LATERAL {
+    width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+  }
+
+  .vista {
+    width: 100%;
+    max-height: none;
+  }
+
+  .titulo {
+    font-size: 1.2rem;
+  }
+
+  .opciones {
+    margin: 10px 0;
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+
+  table {
+    font-size: 12px;
+  }
+}
+
+/* Tablets (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .fila {
+    flex-direction: column;
+  }
+
+  .MENU-LATERAL {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+  }
+
+  .vista {
+    width: 100%;
+    max-height: 60vh;
+  }
+
+  .titulo {
+    font-size: 1.4rem;
+  }
+
+  .opciones {
+    font-size: 1rem;
+  }
+
+  table {
+    font-size: 13px;
+  }
+}
+

@@ -14,7 +14,7 @@ export class Ajustes {
 
   constructor(private login:loginservice,private alerta:Switalert2Service,private rutas:Router){}
 
-  cerrarsession(){
+  async cerrarsession(){
     this.login.logout()
     .then(() => {
       localStorage.clear();
@@ -22,6 +22,8 @@ export class Ajustes {
     })
     .catch((error) => {
       this.alerta.alertaerror("Error al cerrar sesión");
+    }).finally(()=>{
+      window.location.reload();
     });
 
   }

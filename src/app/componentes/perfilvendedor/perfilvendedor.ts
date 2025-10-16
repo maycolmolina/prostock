@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Switalert2Service } from '../../services/switalert2.service';
 import { ActivatedRoute } from '@angular/router';
 import { Realtime } from '../../services/realtime';
-import { usuario } from '../../objetos';
 
 @Component({
   selector: 'app-perfilvendedor',

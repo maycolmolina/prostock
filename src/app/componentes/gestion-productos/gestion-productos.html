@@ -50,8 +50,8 @@
         @for (producto of productos; track producto.id) {
         <tr>
           <td>{{ producto.nombre }}</td>
-          <td>{{ producto.costo | currency : 'USD' }}</td>
-          <td>{{ producto.precio_venta | currency : 'USD' }}</td>
+          <td>{{ producto.costo}} C$</td>
+          <td>{{ producto.precio_venta}}C$</td>
           <td>{{ producto.cantidad }}</td>
           <td>
             <button (click)="verProducto(producto)">Ver</button>
@@ -116,7 +116,7 @@
             <td>{{ c.tipo }}</td>
             <td>{{ c.calidad }}</td>
             <td>{{ c.cantidad + ' ' + c.unidad_medida }}</td>
-            <td>{{ c.precio_unidad }}</td>
+            <td>{{ c.precio_unidad }} C$</td>
             <td>{{ c.proveedor }}</td>
             <td>
               <button>Aumentar</button>
@@ -153,7 +153,7 @@
             @if(plantilla.gratis){
             <td>Gratis</td>
             }@else {
-            <td>{{ plantilla.precio }}</td>
+            <td>{{ plantilla.precio }} C$</td>
             }
 
             <td>{{ plantilla.descargasTotales }}</td>

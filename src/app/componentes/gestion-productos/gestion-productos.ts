@@ -16,15 +16,15 @@ import { ComponenteCarga } from '../componente-carga/componente-carga';
 export class GestionProductos implements OnInit {
   // para cuando una ventana esta cargado o se esta haciendo una silicitud
   cargando = false;
-  // clave unica del administrador 
-  keyuser:any;
+  // clave unica del administrador
+  keyuser: any;
   // cuando pulsamos a vender un producto guardamos ese producto aca
   productoVentaActiva: any;
   // este es el producto original
   originalProductoVenta: any;
-  // donde se guarde el nombre del cliente en caso de realizar una venta 
-  nombreCliente=''
-  // fecha de realizacion de la venta 
+  // donde se guarde el nombre del cliente en caso de realizar una venta
+  nombreCliente = '';
+  // fecha de realizacion de la venta
   fecha: string = '';
   // dependiendo la vista es lo que se mostrara en el template
   vista = 'productoventa';
@@ -58,8 +58,8 @@ export class GestionProductos implements OnInit {
 
   mostrarVenderProducto(id: any) {
     this.ventaMostrar = true;
-    this.fecha='';
-    this.nombreCliente=''
+    this.fecha = '';
+    this.nombreCliente = '';
     const producto = this.productos.find((p) => p.id === id);
     this.productoVentaActiva = { ...producto, cantidad: 1 };
     this.originalProductoVenta = { ...producto };
@@ -72,9 +72,16 @@ export class GestionProductos implements OnInit {
       this.alerta.alertaerror('no tienes suficientes existencias para realizar esta venta');
       return;
     }
-    if(this.productoVentaActiva.precio_venta===null || this.productoVentaActiva.precio_venta<= 0){
-      this.alerta.alertaerror('ingrese un precio mayor a 0')
-      return
+    if (this.productoVentaActiva.cantidad <= 0) {
+      this.alerta.alertaerror('ingrese una cantidad valida');
+      return;
+    }
+    if (
+      this.productoVentaActiva.precio_venta === null ||
+      this.productoVentaActiva.precio_venta <= 0
+    ) {
+      this.alerta.alertaerror('ingrese un precio mayor a 0');
+      return;
     }
     if (this.originalProductoVenta.costo > this.productoVentaActiva.precio_venta) {
       const confirmar = confirm(
@@ -83,40 +90,42 @@ export class GestionProductos implements OnInit {
 
       if (!confirmar) {
         this.alerta.alertaerror('Venta cancelada ');
-        return; 
+        return;
       }
     }
 
-    if(this.nombreCliente===''){
-        this.alerta.alertaerror('ingresa el nombre del cliente al cual se le realizara la venta');
-        return;
+    if (this.nombreCliente === '') {
+      this.alerta.alertaerror('ingresa el nombre del cliente al cual se le realizara la venta');
+      return;
     }
 
-    if(this.fecha===''){
-        this.alerta.alertaerror('especifica la fecha de la venta');
-        return;
+    if (this.fecha === '') {
+      this.alerta.alertaerror('especifica la fecha de la venta');
+      return;
     }
-    try{
-      this.cargando=true;
-      const venta={
-        id_producto:this.productoVentaActiva.id,
-        id_usuario:this.keyuser,
-        cantidad:this.productoVentaActiva.cantidad,
-        precio_venta:this.productoVentaActiva.precio_venta,
-        fecha:this.fecha,
-        gananacia:(this.productoVentaActiva.precio_venta*this.productoVentaActiva.cantidad)-(this.productoVentaActiva.cantidad* this.originalProductoVenta.costo),
-        precio_total:this.productoVentaActiva.precio_venta*this.productoVentaActiva.cantidad
-      }
-      const nueva_existencia=this.originalProductoVenta.cantidad-this.productoVentaActiva.cantidad;
-      await this.global.setventa(venta,nueva_existencia)
-      this.alerta.alertaExito('la venta fue resgistrada a:  '+this.nombreCliente );
+    this.cargando = true;
+    try {
+      const venta = {
+        id_producto: this.productoVentaActiva.id,
+        id_usuario: this.keyuser,
+        cantidad: this.productoVentaActiva.cantidad,
+        precio_venta: this.productoVentaActiva.precio_venta,
+        fecha: this.fecha,
+        ganancia:
+          this.productoVentaActiva.precio_venta * this.productoVentaActiva.cantidad -
+          this.productoVentaActiva.cantidad * this.originalProductoVenta.costo,
+        precio_total: this.productoVentaActiva.precio_venta * this.productoVentaActiva.cantidad,
+      };
+      const nueva_existencia =
+        this.originalProductoVenta.cantidad - this.productoVentaActiva.cantidad;
+      await this.global.setventa(venta, nueva_existencia);
+      this.alerta.alertaExito('la venta fue resgistrada a:  ' + this.nombreCliente);
       await this.obtenerpro();
-      this.cargando=false;
-    }catch{
-
+    } catch {
+      this.alerta.alertaerror('ha ocurrido un error');
+    } finally {
+      this.cargando = false;
     }
-   
-
   }
 
   // cerrar ventana de la venta que se esta realizando
@@ -169,6 +178,16 @@ export class GestionProductos implements OnInit {
   // eliminar producto o plantilla publicada anterior mente
   async eliminarProducto(e: any, url: any, nodo: string) {
     if (confirm(`¿Deseas eliminar el producto definitivamente?`)) {
+      // ANTES DE ELIMINAR CONFIRMAMOS SI NO TENEMOS VENTAS ASOCIADAS
+      if (nodo === 'productos') {
+        const verificar = await this.global.verificarVentaDeProducto(e);
+        if (verificar===true) {
+          this.alerta.info('no puedes eliminar este producto ya que tienes ventas asociadas a el ');
+          return;
+        } else if (verificar==='Error') {
+          return
+        }
+      }
       await this.storage.eliminarImg(url);
       await this.global.remove(e, nodo);
       if (nodo === 'plantillas') {
@@ -179,10 +198,10 @@ export class GestionProductos implements OnInit {
       }
     }
   }
-  
+
   ngOnInit(): void {
     this.obtenerpro();
-    this.keyuser=this.local.getItem('key');
+    this.keyuser = this.local.getItem('key');
   }
 
   constructor(
